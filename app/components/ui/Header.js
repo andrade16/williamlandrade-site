@@ -20,11 +20,21 @@ const HeaderWrapper = styled.header`
   }
 `;
 
+const LogoLink = styled.a`
+  text-decoration: none;
+  color: inherit;
+
+  &:hover {
+    text-decoration: none;
+  }
+`;
+
 const Logo = styled.h1`
   font-size: ${theme.typography.fontSize.xl};
   font-weight: ${theme.typography.fontWeight.bold};
   color: ${theme.colors.text.primary};
   margin: 0;
+  cursor: pointer;
 
   ${theme.mediaQueries.md} {
     font-size: ${theme.typography.fontSize["2xl"]};
@@ -94,12 +104,17 @@ export function Header() {
     <HeaderWrapper>
       <Container>
         <Flex justify='space-between' align='center'>
-          <Logo>William Andrade</Logo>
+          <LogoLink href='/'>
+            <Logo>William Andrade</Logo>
+          </LogoLink>
 
           <Nav>
             <NavList>
               <NavItem>
-                <NavLink href='#about'>About</NavLink>
+                <NavLink href='/'>Home</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href='/about'>About</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href='#projects'>Projects</NavLink>
