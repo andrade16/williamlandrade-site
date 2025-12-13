@@ -1,8 +1,9 @@
 "use client";
 
 import styled from "@emotion/styled";
-import { Container, Section, Grid, Flex } from "./components/layout";
-import { theme } from "./theme";
+
+import { Container, Section, Grid, Flex } from "@/components/layout";
+import { theme } from "@/theme";
 
 const HeroTitle = styled.h1`
   font-size: clamp(2.5rem, 8vw, 5rem);

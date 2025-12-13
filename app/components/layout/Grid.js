@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
-import { theme } from "../../theme";
+
+import { theme } from "@/theme";
 
 export const Grid = styled.div`
   display: grid;

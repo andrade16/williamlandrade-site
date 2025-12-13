@@ -22,5 +22,11 @@
     "react-dom": "^19.2.3",
     "react-redux": "^9.2.0",
     "styled-components": "^6.1.19"
+  },
+  "devDependencies": {
+    "eslint": "^9.39.1",
+    "eslint-config-next": "^16.0.10",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-plugin-import": "^2.32.0"
   }
 }

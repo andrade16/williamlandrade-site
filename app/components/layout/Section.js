@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
-import { theme } from "../../theme";
+
+import { theme } from "@/theme";
 
 export const Section = styled.section`
   padding-top: ${(props) => props.paddingY || theme.spacing.xxl};

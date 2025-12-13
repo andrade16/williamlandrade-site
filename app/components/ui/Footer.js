@@ -1,8 +1,9 @@
 "use client";
 
 import styled from "@emotion/styled";
-import { theme } from "../../theme";
-import { Container } from "../layout/Container";
+
+import { Container } from "@/components/layout";
+import { theme } from "@/theme";
 
 const FooterWrapper = styled.footer`
   background-color: ${theme.colors.background.secondary};

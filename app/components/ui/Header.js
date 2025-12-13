@@ -1,9 +1,9 @@
 "use client";
 
 import styled from "@emotion/styled";
-import { theme } from "../../theme";
-import { Container } from "../layout/Container";
-import { Flex } from "../layout/Flex";
+
+import { Container, Flex } from "@/components/layout";
+import { theme } from "@/theme";
 
 const HeaderWrapper = styled.header`
   background-color: ${theme.colors.background.primary};

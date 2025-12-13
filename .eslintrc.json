@@ -1,0 +1,53 @@
+{
+  "extends": ["next/core-web-vitals", "eslint:recommended"],
+  "plugins": ["import"],
+  "rules": {
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          ["parent", "sibling"],
+          "index"
+        ],
+        "pathGroups": [
+          {
+            "pattern": "react",
+            "group": "external",
+            "position": "before"
+          },
+          {
+            "pattern": "@/**",
+            "group": "internal",
+            "position": "after"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["react"],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ],
+    "import/no-unresolved": "off",
+    "import/named": "off",
+    "no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }]
+  },
+  "settings": {
+    "import/resolver": {
+      "alias": {
+        "map": [
+          ["@", "./app"],
+          ["@/components", "./app/components"],
+          ["@/styles", "./app/styles"],
+          ["@/theme", "./app/theme"],
+          ["@/utils", "./app/utils"]
+        ],
+        "extensions": [".js", ".jsx", ".json"]
+      }
+    }
+  }
+}

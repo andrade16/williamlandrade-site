@@ -1,6 +1,6 @@
-import { Providers } from "./providers";
-import { Header } from "./components/ui/Header";
-import { Footer } from "./components/ui/Footer";
+import { Providers } from "@/providers";
+import { Footer } from "@/components/ui/Footer";
+import { Header } from "@/components/ui/Header";
 
 export const metadata = {
   title: "William Andrade Site",
