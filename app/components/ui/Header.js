@@ -71,7 +71,7 @@ const NavLink = styled.a`
   }
 
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: -4px;
     left: 0;
@@ -117,10 +117,10 @@ export function Header() {
                 <NavLink href='/about'>About</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href='#projects'>Projects</NavLink>
+                <NavLink href='/projects'>Projects</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href='#contact'>Contact</NavLink>
+                <NavLink href='/contact'>Contact</NavLink>
               </NavItem>
             </NavList>
           </Nav>
