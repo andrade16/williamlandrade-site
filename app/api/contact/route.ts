@@ -1,6 +1,5 @@
 // This file will handle POST requests to /api/contact
 import { NextResponse } from "next/server";
-import { request } from "node:http";
 import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -11,15 +10,18 @@ interface ContactFormData {
   name: string;
   email: string;
   message: string;
+  subject: string;
 }
 
 export async function POST(req: Request) {
   try {
     const body: ContactFormData = await req.json();
-    const { name, email, message } = body;
+    const { name, email, subject, message } = body;
     console.log("NAME: ", name);
     console.log("EMAIL: ", email);
     console.log("MESSAGE: ", message);
+    console.log("SUBJECT", subject);
+    console.log("TESTING: ", process.env.CONTACT_EMAIL);
 
     // Validate all required inputs
     if (!name || !email || !message) {
@@ -45,7 +47,8 @@ export async function POST(req: Request) {
       html: `                                                                                                                              
           <h2>New Contact Form Submission</h2>                                                                                               
           <p><strong>Name:</strong> ${name}</p>                                                                                              
-          <p><strong>Email:</strong> ${email}</p>                                                                                            
+          <p><strong>Email:</strong> ${email}</p>  
+          <p><strong>Subject:</strong> ${subject}</p>                                                                                          
           <p><strong>Message:</strong></p>                                                                                                   
           <p>${message}</p>                                                                                                                  
         `,

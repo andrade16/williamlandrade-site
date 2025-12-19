@@ -4,3 +4,4 @@ export { Grid, GridItem } from "./layout/Grid";
 export { Section } from "./layout/Section";
 export { Header } from "./ui/Header";
 export { Footer } from "./ui/Footer";
+export { default as Avatar } from "./ui/Avatar";

@@ -2,7 +2,14 @@ import styled from "@emotion/styled";
 
 import { theme } from "@/theme";
 
-export const Section = styled.section`
+interface SectionProps {
+  paddingY?: string;
+  bgColor?: string;
+  fullHeight?: boolean;
+  center?: boolean;
+}
+
+export const Section = styled.section<SectionProps>`
   padding-top: ${(props) => props.paddingY || theme.spacing.xxl};
   padding-bottom: ${(props) => props.paddingY || theme.spacing.xxl};
   background-color: ${(props) => props.bgColor || "transparent"};

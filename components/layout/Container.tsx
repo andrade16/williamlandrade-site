@@ -2,7 +2,12 @@ import styled from "@emotion/styled";
 
 import { theme } from "@/theme";
 
-export const Container = styled.div`
+interface ContainerProps {
+  fluid?: boolean;
+  narrow?: boolean;
+}
+
+export const Container = styled.div<ContainerProps>`
   width: 100%;
   margin-left: auto;
   margin-right: auto;

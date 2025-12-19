@@ -2,7 +2,23 @@ import styled from "@emotion/styled";
 
 import { theme } from "@/theme";
 
-export const Flex = styled.div`
+interface FlexProps {
+  direction?: "row" | "column" | "row-reverse" | "column-reverse";
+  justify?: string;
+  align?: string;
+  gap?: string;
+  wrap?: "nowrap" | "wrap" | "wrap-reverse";
+  responsive?: boolean;
+}
+
+interface FlexItemProps {
+  flex?: string | number;
+  grow?: number;
+  shrink?: number;
+  basis?: string;
+}
+
+export const Flex = styled.div<FlexProps>`
   display: flex;
   flex-direction: ${(props) => props.direction || "row"};
   justify-content: ${(props) => props.justify || "flex-start"};
@@ -21,7 +37,7 @@ export const Flex = styled.div`
   `}
 `;
 
-export const FlexItem = styled.div`
+export const FlexItem = styled.div<FlexItemProps>`
   ${(props) =>
     props.flex &&
     `

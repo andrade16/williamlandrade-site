@@ -9,17 +9,20 @@ This project includes a comprehensive responsive-first layout system with reusab
 Located in `app/theme/index.js`, the theme includes:
 
 ### Breakpoints
+
 ```js
-xs: '320px'   // Extra small devices
-sm: '576px'   // Small devices
-md: '768px'   // Medium devices (tablets)
-lg: '992px'   // Large devices (desktops)
-xl: '1200px'  // Extra large devices
-xxl: '1400px' // Extra extra large devices
+xs: "320px"; // Extra small devices
+sm: "576px"; // Small devices
+md: "768px"; // Medium devices (tablets)
+lg: "992px"; // Large devices (desktops)
+xl: "1200px"; // Extra large devices
+xxl: "1400px"; // Extra extra large devices
 ```
 
 ### Media Queries
+
 Use `theme.mediaQueries` for responsive styling:
+
 ```js
 ${theme.mediaQueries.md} {
   font-size: 1.5rem;
@@ -27,10 +30,13 @@ ${theme.mediaQueries.md} {
 ```
 
 ### Spacing
+
 Consistent spacing scale: `xs`, `sm`, `md`, `lg`, `xl`, `xxl`, `xxxl`
 
 ### Colors
+
 Modern dark theme with:
+
 - **Primary**: White/light tones for main text
 - **Accent**: Purple (#8b5cf6) for highlights and CTAs
 - **Neutral grays**: 50-950 scale for various UI elements
@@ -39,6 +45,7 @@ Modern dark theme with:
 - **Border colors**: default and hover states
 
 ### Typography
+
 - Font families (primary, monospace)
 - Font sizes (xs through 5xl)
 - Font weights (light, normal, medium, semibold, bold)
@@ -47,6 +54,7 @@ Modern dark theme with:
 ## Layout Components
 
 ### Container
+
 Centers content with responsive max-width and padding.
 
 ```jsx
@@ -58,19 +66,21 @@ import { Container } from './components'
 ```
 
 ### Grid
+
 Responsive grid layout with customizable columns per breakpoint.
 
 ```jsx
-import { Grid, GridItem } from './components'
+import { Grid, GridItem } from "./components";
 
 <Grid cols={1} mdCols={2} lgCols={3} gap="2rem">
   <div>Item 1</div>
   <div>Item 2</div>
   <GridItem colSpan={2}>Spans 2 columns</GridItem>
-</Grid>
+</Grid>;
 ```
 
 Props:
+
 - `cols` - columns for mobile (default: 1)
 - `smCols` - columns for small screens
 - `mdCols` - columns for medium screens
@@ -79,6 +89,7 @@ Props:
 - `gap` - gap between items
 
 ### Flex
+
 Flexbox container with responsive options.
 
 ```jsx
@@ -97,6 +108,7 @@ import { Flex, FlexItem } from './components'
 ```
 
 Props:
+
 - `direction` - flex-direction (default: 'row')
 - `justify` - justify-content (default: 'flex-start')
 - `align` - align-items (default: 'stretch')
@@ -105,6 +117,7 @@ Props:
 - `responsive` - switches to column on mobile
 
 ### Section
+
 Page section with responsive padding.
 
 ```jsx
@@ -118,6 +131,7 @@ import { Section } from './components'
 ```
 
 ### Header
+
 Sticky header with navigation. Located in `app/components/Header.js`.
 
 - Mobile-responsive with hamburger menu button
@@ -125,6 +139,7 @@ Sticky header with navigation. Located in `app/components/Header.js`.
 - Customizable navigation links
 
 ### Footer
+
 Multi-column footer with links and copyright. Located in `app/components/Footer.js`.
 
 - Responsive grid layout
@@ -146,9 +161,9 @@ Located in `app/styles/globalStyles.js`, includes:
 ### Basic Page Layout
 
 ```jsx
-'use client'
+"use client";
 
-import { Container, Section, Grid } from './components'
+import { Container, Section, Grid } from "./components";
 
 export default function Page() {
   return (
@@ -171,17 +186,17 @@ export default function Page() {
         </Container>
       </Section>
     </>
-  )
+  );
 }
 ```
 
 ### Custom Styled Component
 
 ```jsx
-'use client'
+"use client";
 
-import styled from '@emotion/styled'
-import { theme } from './theme'
+import styled from "@emotion/styled";
+import { theme } from "./theme";
 
 const Card = styled.div`
   padding: ${theme.spacing.lg};
@@ -192,7 +207,7 @@ const Card = styled.div`
   ${theme.mediaQueries.md} {
     padding: ${theme.spacing.xl};
   }
-`
+`;
 ```
 
 ## Responsive Design Philosophy
@@ -224,6 +239,7 @@ import { fadeInUp, staggerContainer, staggerItem } from './utils/animations'
 ```
 
 Available animations:
+
 - `fadeIn`, `fadeInUp`, `fadeInDown`
 - `scaleIn`
 - `slideInLeft`, `slideInRight`
@@ -234,6 +250,7 @@ Available animations:
 ### Modifying the Theme
 
 Edit `app/theme/index.js` to customize:
+
 - Brand colors (current accent: purple #8b5cf6)
 - Background colors (dark theme)
 - Breakpoints

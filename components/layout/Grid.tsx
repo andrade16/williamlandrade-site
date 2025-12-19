@@ -2,7 +2,21 @@ import styled from "@emotion/styled";
 
 import { theme } from "@/theme";
 
-export const Grid = styled.div`
+interface GridProps {
+  gap?: string;
+  cols?: number;
+  smCols?: number;
+  mdCols?: number;
+  lgCols?: number;
+  xlCols?: number;
+}
+
+interface GridItemProps {
+  colSpan?: number;
+  rowSpan?: number;
+}
+
+export const Grid = styled.div<GridProps>`
   display: grid;
   gap: ${(props) => props.gap || theme.spacing.md};
   grid-template-columns: repeat(${(props) => props.cols || 1}, 1fr);
@@ -43,7 +57,7 @@ export const Grid = styled.div`
   }
 `;
 
-export const GridItem = styled.div`
+export const GridItem = styled.div<GridItemProps>`
   ${(props) =>
     props.colSpan &&
     `

@@ -9,6 +9,7 @@ Your website has been updated to match a modern dark portfolio design inspired b
 ### 1. Theme System (`app/theme/index.js`)
 
 **Color Scheme:**
+
 - Primary background: `#09090b` (very dark)
 - Secondary background: `#18181b` (dark charcoal)
 - Primary text: `#ffffff` (white)
@@ -16,6 +17,7 @@ Your website has been updated to match a modern dark portfolio design inspired b
 - Accent color: `#8b5cf6` (purple) - for CTAs and highlights
 
 **New Color Structure:**
+
 ```js
 colors: {
   primary: { main: '#ffffff', ... }  // White for text
@@ -36,17 +38,20 @@ colors: {
 ### 3. Components Updated
 
 **Header (`app/components/ui/Header.js`):**
+
 - Glass-morphism effect with `backdrop-filter: blur(10px)`
 - Transparent background with subtle border
 - Animated underline on nav links
 - Purple accent color on hover
 
 **Footer (`app/components/ui/Footer.js`):**
+
 - Dark background with subtle border
 - Consistent with overall dark theme
 - Purple accent on hover
 
 **Homepage (`app/page.js`):**
+
 - Hero section with gradient text effect (white to purple)
 - Feature cards with hover animations
 - Modern CTA buttons with purple accent
@@ -55,6 +60,7 @@ colors: {
 ### 4. New Features
 
 **Animation Utilities (`app/utils/animations.js`):**
+
 - Pre-built framer-motion animation variants
 - `fadeIn`, `fadeInUp`, `fadeInDown`
 - `scaleIn`, `slideInLeft`, `slideInRight`
@@ -63,6 +69,7 @@ colors: {
 ### 5. Dependencies
 
 **Added:**
+
 - `framer-motion` - For smooth, professional animations
 
 ## Visual Features
@@ -100,7 +107,9 @@ Borders:
 ## How to Customize
 
 ### Change Accent Color:
+
 Edit `app/theme/index.js`:
+
 ```js
 accent: {
   main: '#your-color',
@@ -110,6 +119,7 @@ accent: {
 ```
 
 ### Adjust Background Darkness:
+
 ```js
 background: {
   primary: '#your-bg-color',
@@ -119,11 +129,13 @@ background: {
 ```
 
 ### Typography:
+
 All responsive typography is already set up with `clamp()` for fluid scaling.
 
 ## Testing
 
 The site should now have:
+
 - ✓ Dark theme throughout
 - ✓ Purple accent colors
 - ✓ Smooth animations
@@ -136,6 +148,7 @@ Run `npm run dev` and visit `http://localhost:3000` to see the changes.
 ## Reference
 
 Inspired by modern portfolio designs with dark themes, particularly:
+
 - https://www.tajmirul.site/
 - Modern minimalist aesthetic
 - Clean typography

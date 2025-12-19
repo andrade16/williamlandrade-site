@@ -103,29 +103,29 @@ export function Header() {
   return (
     <HeaderWrapper>
       <Container>
-        <Flex justify='space-between' align='center'>
-          <LogoLink href='/'>
+        <Flex justify="space-between" align="center">
+          <LogoLink href="/">
             <Logo>William Andrade</Logo>
           </LogoLink>
 
           <Nav>
             <NavList>
               <NavItem>
-                <NavLink href='/'>Home</NavLink>
+                <NavLink href="/">Home</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href='/about'>About</NavLink>
+                <NavLink href="/about">About</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href='/projects'>Projects</NavLink>
+                <NavLink href="/projects">Projects</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href='/contact'>Contact</NavLink>
+                <NavLink href="/contact">Contact</NavLink>
               </NavItem>
             </NavList>
           </Nav>
 
-          <MobileMenuButton aria-label='Toggle menu'>☰</MobileMenuButton>
+          <MobileMenuButton aria-label="Toggle menu">☰</MobileMenuButton>
         </Flex>
       </Container>
     </HeaderWrapper>

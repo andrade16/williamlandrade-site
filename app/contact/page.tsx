@@ -186,9 +186,20 @@ const SocialLink = styled.a`
   }
 `;
 
+const StatusMessage = styled.div<{ type: "success" | "error" }>`
+  padding: ${theme.spacing.md};
+  border-radius: 8px;
+  margin-bottom: ${theme.spacing.lg};
+  background-color: ${(props) =>
+    props.type === "success" ? theme.colors.accent.main : "#ef4444"};
+  color: white;
+  text-align: center;
+`;
+
 export default function ContactPage() {
   const [formData, setFormData] = useState({
     name: "",
+    subject: "",
     email: "",
     message: "",
   });
@@ -225,7 +236,7 @@ export default function ContactPage() {
           type: "success",
           message: "Message sent Succesfully! I'll get back to you soon.",
         });
-        setFormData({ name: "", email: "", message: "" });
+        setFormData({ name: "", email: "", subject: "", message: "" });
       } else {
         setStatus({
           type: "error",
@@ -283,6 +294,10 @@ export default function ContactPage() {
         </Container>
       </Section>
 
+      {status && (
+        <StatusMessage type={status.type}>{status.message}</StatusMessage>
+      )}
+
       <Section>
         <Container narrow>
           <ContactForm onSubmit={handleSubmit}>
@@ -293,6 +308,8 @@ export default function ContactPage() {
                 id="name"
                 name="name"
                 placeholder="Your name"
+                value={formData.name}
+                onChange={handleChange}
                 required
               />
             </FormGroup>
@@ -304,6 +321,8 @@ export default function ContactPage() {
                 id="email"
                 name="email"
                 placeholder="your.email@example.com"
+                value={formData.email}
+                onChange={handleChange}
                 required
               />
             </FormGroup>
@@ -314,7 +333,9 @@ export default function ContactPage() {
                 type="text"
                 id="subject"
                 name="subject"
+                value={formData.subject}
                 placeholder="What's this about?"
+                onChange={handleChange}
                 required
               />
             </FormGroup>
@@ -325,11 +346,15 @@ export default function ContactPage() {
                 id="message"
                 name="message"
                 placeholder="Tell me about your project or just say hi!"
+                value={formData.message}
+                onChange={handleChange}
                 required
               />
             </FormGroup>
 
-            <SubmitButton type="submit">Send Message</SubmitButton>
+            <SubmitButton type="submit" disabled={isSubmitting}>
+              Send Message
+            </SubmitButton>
           </ContactForm>
         </Container>
       </Section>
