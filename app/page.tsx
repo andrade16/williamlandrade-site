@@ -84,22 +84,22 @@ export default function Home() {
         <Container>
           <HeroTitle>William Andrade</HeroTitle>
           <Avatar
-            src='/images/william_profile_pic.jpg'
-            size='350px'
-            alt='William Andrade'
+            src="/images/william_profile_pic.jpg"
+            size="350px"
+            alt="William Andrade"
           />
           <Subtitle>Full Stack Developer & Designer</Subtitle>
           <Subtitle>
             Building modern web experiences with cutting-edge technologies
           </Subtitle>
-          <CTAButton href='#contact'>Get In Touch</CTAButton>
+          <CTAButton href="#contact">Get In Touch</CTAButton>
         </Container>
       </Section>
 
       <Section bgColor={theme.colors.background.secondary}>
         <Container>
           <SectionTitle>What I Do</SectionTitle>
-          <Grid cols={1} mdCols={2} lgCols={3} gap='2rem'>
+          <Grid cols={1} mdCols={2} lgCols={3} gap="2rem">
             <FeatureCard>
               <h3>Responsive Design</h3>
               <p>
@@ -136,14 +136,14 @@ export default function Home() {
       <Section>
         <Container narrow>
           <SectionTitle>Get Started</SectionTitle>
-          <Flex direction='column' gap='1.5rem' align='center'>
+          <Flex direction="column" gap="1.5rem" align="center">
             <FeatureCard style={{ width: "100%", textAlign: "center" }}>
               <h3>Ready to Build Something Amazing?</h3>
               <p style={{ marginBottom: theme.spacing.lg }}>
                 This starter template is fully customizable with a complete
                 design system, responsive layouts, and modern best practices.
               </p>
-              <CTAButton href='#projects'>View Projects</CTAButton>
+              <CTAButton href="#projects">View Projects</CTAButton>
             </FeatureCard>
           </Flex>
         </Container>

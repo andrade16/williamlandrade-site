@@ -1,13 +1,62 @@
 // This file will handle POST requests to /api/contact
-import { NextApiResponse } from "next";
+import { NextResponse } from "next/server";
+import { request } from "node:http";
 import { Resend } from "resend";
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  if (req.method !== "POST")
-    return res.status(400).json({ message: "Method not accepted" });
-  const { status, data } = await postGeolocalityAddress(req);
-  return res.status(status).json(data);
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+interface ContactFormData {
+  name: string;
+  email: string;
+  message: string;
+}
+
+export async function POST(req: Request) {
+  try {
+    const body: ContactFormData = await req.json();
+    const { name, email, message } = body;
+    console.log("NAME: ", name);
+    console.log("EMAIL: ", email);
+    console.log("MESSAGE: ", message);
+
+    // Validate all required inputs
+    if (!name || !email || !message) {
+      return NextResponse.json(
+        { error: "All fields are required" },
+        { status: 400 }
+      );
+    }
+
+    // Validate email format
+    if (!emailRegex.test(email)) {
+      return NextResponse.json(
+        { error: "Invalid email format" },
+        { status: 400 }
+      );
+    }
+
+    // Send email using Resend
+    const data = await resend.emails.send({
+      from: "onboarding@resend.dev", // or your verified domain
+      to: process.env.CONTACT_EMAIL!,
+      subject: "New Contact Form Submission",
+      html: `                                                                                                                              
+          <h2>New Contact Form Submission</h2>                                                                                               
+          <p><strong>Name:</strong> ${name}</p>                                                                                              
+          <p><strong>Email:</strong> ${email}</p>                                                                                            
+          <p><strong>Message:</strong></p>                                                                                                   
+          <p>${message}</p>                                                                                                                  
+        `,
+    });
+
+    return NextResponse.json({ success: true, data });
+  } catch (error) {
+    console.error("Error sending email: ", error);
+    return NextResponse.json(
+      { error: "Failed to send email" },
+      { status: 500 }
+    );
+  }
 }

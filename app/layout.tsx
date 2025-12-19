@@ -14,7 +14,7 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang='en'>
+    <html lang="en">
       <body
         style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
       >

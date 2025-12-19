@@ -1,5 +1,6 @@
 "use client";
 
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import styled from "@emotion/styled";
 
 import { Container, Section, Grid, Flex } from "@/components/layout";
@@ -186,10 +187,59 @@ const SocialLink = styled.a`
 `;
 
 export default function ContactPage() {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState<{
+    type: "success" | "error";
+    message: string;
+  } | null>(null);
+
+  const handleChange = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData({ ...formData, [event.target.name]: event.target.value });
+  };
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     // Handle form submission here
-    console.log("Form submitted");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setStatus({
+          type: "success",
+          message: "Message sent Succesfully! I'll get back to you soon.",
+        });
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        setStatus({
+          type: "error",
+          message: data.error || "Failed to send message. Please try again.",
+        });
+      }
+    } catch (error) {
+      setStatus({
+        type: "error",
+        message: "Network error. Please try again.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -206,28 +256,28 @@ export default function ContactPage() {
 
       <Section bgColor={theme.colors.background.secondary}>
         <Container>
-          <Grid cols={1} mdCols={3} gap='2rem'>
+          <Grid cols={1} mdCols={3} gap="2rem">
             <ContactCard>
-              <div className='icon'>📧</div>
+              <div className="icon">📧</div>
               <h3>Email</h3>
               <p>Send me an email anytime</p>
-              <a href='mailto:andrade.william61@gmail.com'>
+              <a href="mailto:andrade.william61@gmail.com">
                 andrade.william61@gmail.com
               </a>
             </ContactCard>
 
             <ContactCard>
-              <div className='icon'>📱</div>
+              <div className="icon">📱</div>
               <h3>Phone</h3>
               <p>Give me a call</p>
-              <a href='tel:+15713385130'>+1 (571) 338-5130</a>
+              <a href="tel:+15713385130">+1 (571) 338-5130</a>
             </ContactCard>
 
             <ContactCard>
-              <div className='icon'>📍</div>
+              <div className="icon">📍</div>
               <h3>Location</h3>
               <p>Based in</p>
-              <a href='#'>San Francisco, CA</a>
+              <a href="#">San Francisco, CA</a>
             </ContactCard>
           </Grid>
         </Container>
@@ -237,49 +287,49 @@ export default function ContactPage() {
         <Container narrow>
           <ContactForm onSubmit={handleSubmit}>
             <FormGroup>
-              <Label htmlFor='name'>Name</Label>
+              <Label htmlFor="name">Name</Label>
               <Input
-                type='text'
-                id='name'
-                name='name'
-                placeholder='Your name'
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Your name"
                 required
               />
             </FormGroup>
 
             <FormGroup>
-              <Label htmlFor='email'>Email</Label>
+              <Label htmlFor="email">Email</Label>
               <Input
-                type='email'
-                id='email'
-                name='email'
-                placeholder='your.email@example.com'
+                type="email"
+                id="email"
+                name="email"
+                placeholder="your.email@example.com"
                 required
               />
             </FormGroup>
 
             <FormGroup>
-              <Label htmlFor='subject'>Subject</Label>
+              <Label htmlFor="subject">Subject</Label>
               <Input
-                type='text'
-                id='subject'
-                name='subject'
+                type="text"
+                id="subject"
+                name="subject"
                 placeholder="What's this about?"
                 required
               />
             </FormGroup>
 
             <FormGroup>
-              <Label htmlFor='message'>Message</Label>
+              <Label htmlFor="message">Message</Label>
               <TextArea
-                id='message'
-                name='message'
-                placeholder='Tell me about your project or just say hi!'
+                id="message"
+                name="message"
+                placeholder="Tell me about your project or just say hi!"
                 required
               />
             </FormGroup>
 
-            <SubmitButton type='submit'>Send Message</SubmitButton>
+            <SubmitButton type="submit">Send Message</SubmitButton>
           </ContactForm>
         </Container>
       </Section>
@@ -306,13 +356,13 @@ export default function ContactPage() {
               Follow me on social media for updates and insights
             </p>
             <SocialLinks>
-              <SocialLink href='https://github.com' aria-label='GitHub'>
+              <SocialLink href="https://github.com" aria-label="GitHub">
                 🐙
               </SocialLink>
-              <SocialLink href='https://linkedin.com' aria-label='LinkedIn'>
+              <SocialLink href="https://linkedin.com" aria-label="LinkedIn">
                 💼
               </SocialLink>
-              <SocialLink href='https://instagram.com' aria-label='Instagram'>
+              <SocialLink href="https://instagram.com" aria-label="Instagram">
                 📷
               </SocialLink>
             </SocialLinks>
