@@ -3,10 +3,14 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./app/*"],
-      "@/components/*": ["./app/components/*"],
+      "@/components": ["./components"],
+      "@/components/*": ["./components/*"],
       "@/styles/*": ["./app/styles/*"],
-      "@/theme/*": ["./app/theme/*"],
-      "@/utils/*": ["./app/utils/*"]
+      "@/theme": ["./theme"],
+      "@/theme/*": ["./theme/*"],
+      "@/utils/*": ["./lib/*"],
+      "@/lib": ["./lib"],
+      "@/lib/*": ["./lib/*"]
     }
   },
   "exclude": ["node_modules", ".next"]
