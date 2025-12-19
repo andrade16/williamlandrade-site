@@ -3,6 +3,7 @@
 import styled from "@emotion/styled";
 
 import { Container, Section, Grid, Flex } from "@/components/layout";
+import { Avatar } from "@/components";
 import { theme } from "@/theme";
 
 const HeroTitle = styled.h1`
@@ -82,6 +83,11 @@ export default function Home() {
       <Section fullHeight center>
         <Container>
           <HeroTitle>William Andrade</HeroTitle>
+          <Avatar
+            src='/images/william_profile_pic.jpg'
+            size='350px'
+            alt='William Andrade'
+          />
           <Subtitle>Full Stack Developer & Designer</Subtitle>
           <Subtitle>
             Building modern web experiences with cutting-edge technologies

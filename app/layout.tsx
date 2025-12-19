@@ -1,13 +1,18 @@
-import { Providers } from "@/providers";
+import { Providers } from "@/app/providers";
 import { Footer } from "@/components/ui/Footer";
 import { Header } from "@/components/ui/Header";
+import { ReactNode } from "react";
 
 export const metadata = {
   title: "William Andrade Site",
   description: "Personal website",
 };
 
-export default function RootLayout({ children }) {
+interface RootLayoutProps {
+  children: ReactNode;
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang='en'>
       <body
