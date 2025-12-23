@@ -202,11 +202,11 @@ export default function AboutPage() {
         <Container>
           <Grid cols={1} mdCols={3} gap="3rem">
             <StatCard>
-              <div className="number">5+</div>
+              <div className="number">9+</div>
               <div className="label">Years Experience</div>
             </StatCard>
             <StatCard>
-              <div className="number">50+</div>
+              <div className="number">25+</div>
               <div className="label">Projects Completed</div>
             </StatCard>
             <StatCard>
@@ -222,34 +222,65 @@ export default function AboutPage() {
           <SectionTitle>Experience</SectionTitle>
 
           <ExperienceCard>
-            <h3>Senior Full Stack Developer</h3>
-            <div className="role">Tech Company Inc.</div>
-            <div className="period">2021 - Present</div>
+            <h3>Senior Software Engineer II</h3>
+            <div className="role">Eaze Inc.</div>
+            <div className="period">September 2021 - December 2025</div>
             <p>
-              Leading development of modern web applications using React,
-              Next.js, and Node.js. Architecting scalable solutions and
-              mentoring junior developers.
+              At Eaze, I focused on building and improving key consumer-facing
+              experiences across the web platform. I helped ship high-impact
+              features like brand pages and city landing pages, integrated
+              third-party services for customer support and identity
+              verification, and contributed to shared testing infrastructure to
+              improve reliability across teams. Working primarily in React and
+              TypeScript, I also collaborated across the stack, making backend
+              contributions where needed to support new features and fixes.
             </p>
           </ExperienceCard>
 
           <ExperienceCard>
-            <h3>Full Stack Developer</h3>
-            <div className="role">Digital Agency</div>
-            <div className="period">2019 - 2021</div>
+            <h3>Senior Full Stack Software Engineer</h3>
+            <div className="role">Capital One</div>
+            <div className="period">December 2018 - September 2021</div>
             <p>
-              Built responsive websites and web applications for various
-              clients. Specialized in React development and API integration.
+              At Capital One, I worked on a mix of front-end and backend
+              projects focused on improving core customer and internal
+              experiences. I helped build and own features like a
+              next-generation transaction search, internal monitoring
+              dashboards, and a shared React component library, while also
+              leading improvements around accessibility and search
+              functionality. I also developed backend APIs to support product
+              features such as ratings and reviews, working with modern tools
+              like React, TypeScript, NestJS, and Elasticsearch.
             </p>
           </ExperienceCard>
 
           <ExperienceCard>
-            <h3>Frontend Developer</h3>
-            <div className="role">Startup Co.</div>
-            <div className="period">2018 - 2019</div>
+            <h3>Software Engineer</h3>
+            <div className="role">HumanGeo</div>
+            <div className="period">June 2016 - November 2018</div>
             <p>
-              Developed user interfaces and implemented designs using modern
-              frontend technologies. Collaborated with designers and backend
-              developers.
+              At HumanGeo, I worked on data-driven web applications used in
+              government and analytical contexts. I helped design and build a
+              React/Redux tracking platform, maintained and enhanced existing
+              Angular applications, and implemented tools like PDF generation to
+              turn web-based insights into shareable reports. I also supported
+              internal teams by writing Python scripts for data collection and
+              contributing to code reviews and QA efforts.
+            </p>
+          </ExperienceCard>
+
+          <ExperienceCard>
+            <h3>Software Engineer</h3>
+            <div className="role">Northrup Grumman Corporation</div>
+            <div className="period">January 2015 - June 2016</div>
+            <p>
+              At Northrop Grumman, I worked on a Computer Aided Dispatch system
+              built with C# and .NET, contributing to both new development and
+              ongoing maintenance of legacy Windows applications. I collaborated
+              directly with customers to refine requirements and deliver
+              functionality that met real operational needs. I also supported
+              quality assurance efforts across multiple projects to help ensure
+              reliability and stability.
             </p>
           </ExperienceCard>
         </Container>
