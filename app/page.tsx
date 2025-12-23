@@ -125,12 +125,12 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.9 }}
           >
-            <CTAButton href="#contact">Get In Touch</CTAButton>
+            <CTAButton href="/contact">Get In Touch</CTAButton>
           </motion.div>
         </Container>
       </Section>
 
-      <Section bgColor={theme.colors.background.secondary}>
+      <Section bgColor={theme.colors.background.secondary} id="services">
         <Container>
           <ScrollReveal>
             <SectionTitle>What I Do</SectionTitle>
@@ -149,7 +149,8 @@ export default function Home() {
               <FeatureCard>
                 <h3>Modern Stack</h3>
                 <p>
-                  Using Next.js, React, TypeScript, and modern CSS-in-JS solutions
+                  Using Next.js, React, TypeScript, and modern CSS-in-JS
+                  solutions
                 </p>
               </FeatureCard>
             </ScrollReveal>

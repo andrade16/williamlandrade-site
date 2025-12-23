@@ -71,13 +71,13 @@ export function Footer() {
             <FooterTitle>About</FooterTitle>
             <FooterList>
               <FooterListItem>
-                <FooterLink href="#about">About Me</FooterLink>
+                <FooterLink href="/about">About Me</FooterLink>
               </FooterListItem>
               <FooterListItem>
-                <FooterLink href="#projects">Projects</FooterLink>
+                <FooterLink href="/about#skills">Skills</FooterLink>
               </FooterListItem>
               <FooterListItem>
-                <FooterLink href="#experience">Experience</FooterLink>
+                <FooterLink href="/about#experience">Experience</FooterLink>
               </FooterListItem>
             </FooterList>
           </FooterSection>
@@ -87,7 +87,7 @@ export function Footer() {
             <FooterList>
               <FooterListItem>
                 <FooterLink
-                  href="https://github.com"
+                  href="https://github.com/andrade16"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -96,7 +96,7 @@ export function Footer() {
               </FooterListItem>
               <FooterListItem>
                 <FooterLink
-                  href="https://linkedin.com"
+                  href="https://www.linkedin.com/in/william-andrade/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -104,19 +104,24 @@ export function Footer() {
                 </FooterLink>
               </FooterListItem>
               <FooterListItem>
-                <FooterLink href="mailto:hello@example.com">Email</FooterLink>
+                <FooterLink href="mailto:andrade.william61@gmail.com">
+                  Email
+                </FooterLink>
               </FooterListItem>
             </FooterList>
           </FooterSection>
 
           <FooterSection>
-            <FooterTitle>Legal</FooterTitle>
+            <FooterTitle>Quick Links</FooterTitle>
             <FooterList>
               <FooterListItem>
-                <FooterLink href="#privacy">Privacy Policy</FooterLink>
+                <FooterLink href="/">Home</FooterLink>
               </FooterListItem>
               <FooterListItem>
-                <FooterLink href="#terms">Terms of Service</FooterLink>
+                <FooterLink href="/about">About</FooterLink>
+              </FooterListItem>
+              <FooterListItem>
+                <FooterLink href="/contact">Contact</FooterLink>
               </FooterListItem>
             </FooterList>
           </FooterSection>

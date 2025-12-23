@@ -151,8 +151,8 @@ export default function AboutPage() {
           <ScrollReveal delay={0.2}>
             <Bio>
               <p>
-                Hi! I'm William Andrade, a passionate full-stack developer with a
-                love for creating beautiful, functional web experiences.
+                Hi! I'm William Andrade, a passionate full-stack developer with
+                a love for creating beautiful, functional web experiences.
               </p>
               <p>
                 I specialize in modern web technologies and have a keen eye for
@@ -164,7 +164,7 @@ export default function AboutPage() {
         </Container>
       </Section>
 
-      <Section bgColor={theme.colors.background.secondary}>
+      <Section bgColor={theme.colors.background.secondary} id="skills">
         <Container>
           <ScrollReveal>
             <SectionTitle>Skills & Expertise</SectionTitle>
@@ -237,7 +237,7 @@ export default function AboutPage() {
         </Container>
       </Section>
 
-      <Section bgColor={theme.colors.background.secondary}>
+      <Section bgColor={theme.colors.background.secondary} id="experience">
         <Container narrow>
           <ScrollReveal>
             <SectionTitle>Experience</SectionTitle>
@@ -253,10 +253,11 @@ export default function AboutPage() {
                 experiences across the web platform. I helped ship high-impact
                 features like brand pages and city landing pages, integrated
                 third-party services for customer support and identity
-                verification, and contributed to shared testing infrastructure to
-                improve reliability across teams. Working primarily in React and
-                TypeScript, I also collaborated across the stack, making backend
-                contributions where needed to support new features and fixes.
+                verification, and contributed to shared testing infrastructure
+                to improve reliability across teams. Working primarily in React
+                and TypeScript, I also collaborated across the stack, making
+                backend contributions where needed to support new features and
+                fixes.
               </p>
             </ExperienceCard>
           </ScrollReveal>
@@ -289,10 +290,10 @@ export default function AboutPage() {
                 At HumanGeo, I worked on data-driven web applications used in
                 government and analytical contexts. I helped design and build a
                 React/Redux tracking platform, maintained and enhanced existing
-                Angular applications, and implemented tools like PDF generation to
-                turn web-based insights into shareable reports. I also supported
-                internal teams by writing Python scripts for data collection and
-                contributing to code reviews and QA efforts.
+                Angular applications, and implemented tools like PDF generation
+                to turn web-based insights into shareable reports. I also
+                supported internal teams by writing Python scripts for data
+                collection and contributing to code reviews and QA efforts.
               </p>
             </ExperienceCard>
           </ScrollReveal>
@@ -303,13 +304,13 @@ export default function AboutPage() {
               <div className="role">Northrup Grumman Corporation</div>
               <div className="period">January 2015 - June 2016</div>
               <p>
-                At Northrop Grumman, I worked on a Computer Aided Dispatch system
-                built with C# and .NET, contributing to both new development and
-                ongoing maintenance of legacy Windows applications. I collaborated
-                directly with customers to refine requirements and deliver
-                functionality that met real operational needs. I also supported
-                quality assurance efforts across multiple projects to help ensure
-                reliability and stability.
+                At Northrop Grumman, I worked on a Computer Aided Dispatch
+                system built with C# and .NET, contributing to both new
+                development and ongoing maintenance of legacy Windows
+                applications. I collaborated directly with customers to refine
+                requirements and deliver functionality that met real operational
+                needs. I also supported quality assurance efforts across
+                multiple projects to help ensure reliability and stability.
               </p>
             </ExperienceCard>
           </ScrollReveal>
@@ -332,7 +333,7 @@ export default function AboutPage() {
                 opportunities.
               </p>
               <a
-                href="mailto:hello@williamandrade.com"
+                href="mailto:andrade.william61@gmail.com"
                 style={{
                   display: "inline-block",
                   padding: `${theme.spacing.md} ${theme.spacing.xl}`,
