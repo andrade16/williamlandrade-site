@@ -331,10 +331,11 @@ export default function AboutPage() {
                 }}
               >
                 I'm always interested in hearing about new projects and
-                opportunities.
+                opportunities. Feel free to download a copy of my resume below!
               </p>
               <a
-                href="mailto:andrade.william61@gmail.com"
+                href="/resume.pdf"
+                download="William_Andrade_Resume.pdf"
                 style={{
                   display: "inline-block",
                   padding: `${theme.spacing.md} ${theme.spacing.xl}`,
@@ -346,7 +347,7 @@ export default function AboutPage() {
                   textDecoration: "none",
                 }}
               >
-                Get In Touch
+                📄 Download Resume
               </a>
             </div>
           </ScrollReveal>
