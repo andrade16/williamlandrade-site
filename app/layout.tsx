@@ -1,3 +1,4 @@
+import EmotionRegistry from "@/app/EmotionRegistry";
 import { Providers } from "@/app/providers";
 import { Footer } from "@/components/ui/Footer";
 import { Header } from "@/components/ui/Header";
@@ -14,15 +15,17 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
       >
-        <Providers>
-          <Header />
-          <main style={{ flex: "1" }}>{children}</main>
-          <Footer />
-        </Providers>
+        <EmotionRegistry>
+          <Providers>
+            <Header />
+            <main style={{ flex: "1" }}>{children}</main>
+            <Footer />
+          </Providers>
+        </EmotionRegistry>
       </body>
     </html>
   );
