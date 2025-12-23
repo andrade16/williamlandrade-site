@@ -5,6 +5,7 @@ import styled from "@emotion/styled";
 
 import { Container, Section, Grid, Flex } from "@/components/layout";
 import { theme } from "@/theme";
+import { ScrollReveal } from "@/components/animations/ScrollReveal";
 
 const PageTitle = styled.h1`
   font-size: clamp(2.5rem, 6vw, 4rem);
@@ -300,39 +301,49 @@ export default function ContactPage() {
 
       <Section center paddingY={theme.spacing.xxxl}>
         <Container>
-          <PageTitle>Get In Touch</PageTitle>
-          <Subtitle>
-            Have a project in mind or just want to chat? I'd love to hear from
-            you. Drop me a message and I'll get back to you as soon as possible.
-          </Subtitle>
+          <ScrollReveal>
+            <PageTitle>Get In Touch</PageTitle>
+          </ScrollReveal>
+          <ScrollReveal delay={0.2}>
+            <Subtitle>
+              Have a project in mind or just want to chat? I'd love to hear from
+              you. Drop me a message and I'll get back to you as soon as possible.
+            </Subtitle>
+          </ScrollReveal>
         </Container>
       </Section>
 
       <Section bgColor={theme.colors.background.secondary}>
         <Container>
           <Grid cols={1} mdCols={3} gap="2rem">
-            <ContactCard>
-              <div className="icon">📧</div>
-              <h3>Email</h3>
-              <p>Send me an email anytime</p>
-              <a href="mailto:andrade.william61@gmail.com">
-                andrade.william61@gmail.com
-              </a>
-            </ContactCard>
+            <ScrollReveal delay={0.1}>
+              <ContactCard>
+                <div className="icon">📧</div>
+                <h3>Email</h3>
+                <p>Send me an email anytime</p>
+                <a href="mailto:andrade.william61@gmail.com">
+                  andrade.william61@gmail.com
+                </a>
+              </ContactCard>
+            </ScrollReveal>
 
-            <ContactCard>
-              <div className="icon">📱</div>
-              <h3>Phone</h3>
-              <p>Give me a call</p>
-              <a href="tel:+15713385130">+1 (571) 338-5130</a>
-            </ContactCard>
+            <ScrollReveal delay={0.2}>
+              <ContactCard>
+                <div className="icon">📱</div>
+                <h3>Phone</h3>
+                <p>Give me a call</p>
+                <a href="tel:+15713385130">+1 (571) 338-5130</a>
+              </ContactCard>
+            </ScrollReveal>
 
-            <ContactCard>
-              <div className="icon">📍</div>
-              <h3>Location</h3>
-              <p>Based in</p>
-              <a href="#">San Francisco, CA</a>
-            </ContactCard>
+            <ScrollReveal delay={0.3}>
+              <ContactCard>
+                <div className="icon">📍</div>
+                <h3>Location</h3>
+                <p>Based in</p>
+                <a href="#">San Francisco, CA</a>
+              </ContactCard>
+            </ScrollReveal>
           </Grid>
         </Container>
       </Section>
@@ -400,37 +411,39 @@ export default function ContactPage() {
 
       <Section bgColor={theme.colors.background.secondary}>
         <Container narrow>
-          <div style={{ textAlign: "center" }}>
-            <h2
-              style={{
-                fontSize: theme.typography.fontSize["3xl"],
-                color: theme.colors.text.primary,
-                marginBottom: theme.spacing.md,
-              }}
-            >
-              Connect With Me
-            </h2>
-            <p
-              style={{
-                fontSize: theme.typography.fontSize.lg,
-                color: theme.colors.text.secondary,
-                marginBottom: theme.spacing.xl,
-              }}
-            >
-              Follow me on social media for updates and insights
-            </p>
-            <SocialLinks>
-              <SocialLink href="https://github.com" aria-label="GitHub">
-                🐙
-              </SocialLink>
-              <SocialLink href="https://linkedin.com" aria-label="LinkedIn">
-                💼
-              </SocialLink>
-              <SocialLink href="https://instagram.com" aria-label="Instagram">
-                📷
-              </SocialLink>
-            </SocialLinks>
-          </div>
+          <ScrollReveal>
+            <div style={{ textAlign: "center" }}>
+              <h2
+                style={{
+                  fontSize: theme.typography.fontSize["3xl"],
+                  color: theme.colors.text.primary,
+                  marginBottom: theme.spacing.md,
+                }}
+              >
+                Connect With Me
+              </h2>
+              <p
+                style={{
+                  fontSize: theme.typography.fontSize.lg,
+                  color: theme.colors.text.secondary,
+                  marginBottom: theme.spacing.xl,
+                }}
+              >
+                Follow me on social media for updates and insights
+              </p>
+              <SocialLinks>
+                <SocialLink href="https://github.com" aria-label="GitHub">
+                  🐙
+                </SocialLink>
+                <SocialLink href="https://linkedin.com" aria-label="LinkedIn">
+                  💼
+                </SocialLink>
+                <SocialLink href="https://instagram.com" aria-label="Instagram">
+                  📷
+                </SocialLink>
+              </SocialLinks>
+            </div>
+          </ScrollReveal>
         </Container>
       </Section>
     </>

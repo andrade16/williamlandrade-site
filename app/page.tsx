@@ -1,10 +1,12 @@
 "use client";
 
 import styled from "@emotion/styled";
+import { motion } from "framer-motion";
 
 import { Container, Section, Grid, Flex } from "@/components/layout";
 import { Avatar } from "@/components";
 import { theme } from "@/theme";
+import { ScrollReveal } from "@/components/animations/ScrollReveal";
 
 const HeroTitle = styled.h1`
   font-size: clamp(2.5rem, 8vw, 5rem);
@@ -82,71 +84,119 @@ export default function Home() {
     <>
       <Section fullHeight center>
         <Container>
-          <HeroTitle>William Andrade</HeroTitle>
-          <Avatar
-            src="/images/william_profile_pic.jpg"
-            size="350px"
-            alt="William Andrade"
-            width={350}
-            height={350}
-          />
-          <Subtitle>Full Stack Developer & Designer</Subtitle>
-          <Subtitle>
-            Building modern web experiences with cutting-edge technologies
-          </Subtitle>
-          <CTAButton href="#contact">Get In Touch</CTAButton>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            <HeroTitle>William Andrade</HeroTitle>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
+            <Avatar
+              src="/images/william_profile_pic.jpg"
+              size="350px"
+              alt="William Andrade"
+              width={350}
+              height={350}
+            />
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+          >
+            <Subtitle>Full Stack Developer & Designer</Subtitle>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.7 }}
+          >
+            <Subtitle>
+              Building modern web experiences with cutting-edge technologies
+            </Subtitle>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.9 }}
+          >
+            <CTAButton href="#contact">Get In Touch</CTAButton>
+          </motion.div>
         </Container>
       </Section>
 
       <Section bgColor={theme.colors.background.secondary}>
         <Container>
-          <SectionTitle>What I Do</SectionTitle>
+          <ScrollReveal>
+            <SectionTitle>What I Do</SectionTitle>
+          </ScrollReveal>
           <Grid cols={1} mdCols={2} lgCols={3} gap="2rem">
-            <FeatureCard>
-              <h3>Responsive Design</h3>
-              <p>
-                Mobile-first approach ensuring seamless experiences across all
-                devices
-              </p>
-            </FeatureCard>
-            <FeatureCard>
-              <h3>Modern Stack</h3>
-              <p>
-                Using Next.js, React, TypeScript, and modern CSS-in-JS solutions
-              </p>
-            </FeatureCard>
-            <FeatureCard>
-              <h3>Performance</h3>
-              <p>Optimized builds with focus on speed and user experience</p>
-            </FeatureCard>
-            <FeatureCard>
-              <h3>Clean Code</h3>
-              <p>Well-structured, maintainable, and scalable architecture</p>
-            </FeatureCard>
-            <FeatureCard>
-              <h3>Design Systems</h3>
-              <p>Comprehensive theming with reusable component libraries</p>
-            </FeatureCard>
-            <FeatureCard>
-              <h3>User Experience</h3>
-              <p>Smooth animations and intuitive interactions</p>
-            </FeatureCard>
+            <ScrollReveal delay={0.1}>
+              <FeatureCard>
+                <h3>Responsive Design</h3>
+                <p>
+                  Mobile-first approach ensuring seamless experiences across all
+                  devices
+                </p>
+              </FeatureCard>
+            </ScrollReveal>
+            <ScrollReveal delay={0.2}>
+              <FeatureCard>
+                <h3>Modern Stack</h3>
+                <p>
+                  Using Next.js, React, TypeScript, and modern CSS-in-JS solutions
+                </p>
+              </FeatureCard>
+            </ScrollReveal>
+            <ScrollReveal delay={0.3}>
+              <FeatureCard>
+                <h3>Performance</h3>
+                <p>Optimized builds with focus on speed and user experience</p>
+              </FeatureCard>
+            </ScrollReveal>
+            <ScrollReveal delay={0.1}>
+              <FeatureCard>
+                <h3>Clean Code</h3>
+                <p>Well-structured, maintainable, and scalable architecture</p>
+              </FeatureCard>
+            </ScrollReveal>
+            <ScrollReveal delay={0.2}>
+              <FeatureCard>
+                <h3>Design Systems</h3>
+                <p>Comprehensive theming with reusable component libraries</p>
+              </FeatureCard>
+            </ScrollReveal>
+            <ScrollReveal delay={0.3}>
+              <FeatureCard>
+                <h3>User Experience</h3>
+                <p>Smooth animations and intuitive interactions</p>
+              </FeatureCard>
+            </ScrollReveal>
           </Grid>
         </Container>
       </Section>
 
       <Section>
         <Container narrow>
-          <SectionTitle>Get Started</SectionTitle>
+          <ScrollReveal>
+            <SectionTitle>Get Started</SectionTitle>
+          </ScrollReveal>
           <Flex direction="column" gap="1.5rem" align="center">
-            <FeatureCard style={{ width: "100%", textAlign: "center" }}>
-              <h3>Ready to Build Something Amazing?</h3>
-              <p style={{ marginBottom: theme.spacing.lg }}>
-                This starter template is fully customizable with a complete
-                design system, responsive layouts, and modern best practices.
-              </p>
-              <CTAButton href="#projects">View Projects</CTAButton>
-            </FeatureCard>
+            <ScrollReveal delay={0.2}>
+              <FeatureCard style={{ width: "100%", textAlign: "center" }}>
+                <h3>Ready to Build Something Amazing?</h3>
+                <p style={{ marginBottom: theme.spacing.lg }}>
+                  This starter template is fully customizable with a complete
+                  design system, responsive layouts, and modern best practices.
+                </p>
+                <CTAButton href="#projects">View Projects</CTAButton>
+              </FeatureCard>
+            </ScrollReveal>
           </Flex>
         </Container>
       </Section>
