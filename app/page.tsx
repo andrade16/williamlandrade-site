@@ -2,6 +2,7 @@
 
 import styled from "@emotion/styled";
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 
 import { Container, Section, Grid, Flex } from "@/components/layout";
 import { Avatar } from "@/components";
@@ -80,20 +81,26 @@ const SectionTitle = styled.h2`
 `;
 
 export default function Home() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
     <>
       <Section fullHeight center>
         <Container>
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={false}
+            animate={mounted ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
             <HeroTitle>William Andrade</HeroTitle>
           </motion.div>
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
+            initial={false}
+            animate={mounted ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
             <Avatar
@@ -105,15 +112,15 @@ export default function Home() {
             />
           </motion.div>
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={false}
+            animate={mounted ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.5 }}
           >
             <Subtitle>Full Stack Web Developer</Subtitle>
           </motion.div>
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={false}
+            animate={mounted ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.7 }}
           >
             <Subtitle>
@@ -121,8 +128,8 @@ export default function Home() {
             </Subtitle>
           </motion.div>
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={false}
+            animate={mounted ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.9 }}
           >
             <CTAButton href="/contact">Get In Touch</CTAButton>
@@ -192,10 +199,10 @@ export default function Home() {
               <FeatureCard style={{ width: "100%", textAlign: "center" }}>
                 <h3>Ready to Build Something Amazing?</h3>
                 <p style={{ marginBottom: theme.spacing.lg }}>
-                  This starter template is fully customizable with a complete
-                  design system, responsive layouts, and modern best practices.
+                  View some of my previous projects and let's discuss how we can
+                  work together to create your next web application.
                 </p>
-                <CTAButton href="#projects">View Projects</CTAButton>
+                <CTAButton href="/projects">View Projects</CTAButton>
               </FeatureCard>
             </ScrollReveal>
           </Flex>

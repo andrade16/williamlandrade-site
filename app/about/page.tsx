@@ -188,6 +188,7 @@ export default function AboutPage() {
                 <h3>Backend Development</h3>
                 <ul>
                   <li>Node.js & Express</li>
+                  <li>Python</li>
                   <li>RESTful APIs</li>
                   <li>Database Design</li>
                   <li>Authentication & Security</li>
