@@ -121,6 +121,9 @@ export function Footer() {
                 <FooterLink href="/about">About</FooterLink>
               </FooterListItem>
               <FooterListItem>
+                <FooterLink href="/projects">Projects</FooterLink>
+              </FooterListItem>
+              <FooterListItem>
                 <FooterLink href="/contact">Contact</FooterLink>
               </FooterListItem>
             </FooterList>
