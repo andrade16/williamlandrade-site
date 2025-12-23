@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useState, useEffect } from "react";
 import styled from "@emotion/styled";
 
 import { Container, Section, Grid, Flex } from "@/components/layout";
@@ -186,14 +186,27 @@ const SocialLink = styled.a`
   }
 `;
 
-const StatusMessage = styled.div<{ type: "success" | "error" }>`
-  padding: ${theme.spacing.md};
+const StatusMessage = styled.div<{
+  type: "success" | "error";
+  isVisible: boolean;
+}>`
+  position: fixed;
+  top: ${theme.spacing.xl};
+  left: 50%;
+  transform: translateX(-50%);
+  padding: ${theme.spacing.md} ${theme.spacing.xl};
   border-radius: 8px;
-  margin-bottom: ${theme.spacing.lg};
   background-color: ${(props) =>
     props.type === "success" ? theme.colors.accent.main : "#ef4444"};
   color: white;
   text-align: center;
+  opacity: ${(props) => (props.isVisible ? 1 : 0)};
+  transition: opacity 0.5s ease-out;
+  z-index: 1000;
+  box-shadow: ${theme.shadows.lg};
+  max-width: 90%;
+  width: auto;
+  pointer-events: ${(props) => (props.isVisible ? "auto" : "none")};
 `;
 
 export default function ContactPage() {
@@ -209,6 +222,7 @@ export default function ContactPage() {
     type: "success" | "error";
     message: string;
   } | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   const handleChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -234,7 +248,7 @@ export default function ContactPage() {
       if (response.ok) {
         setStatus({
           type: "success",
-          message: "Message sent Succesfully! I'll get back to you soon.",
+          message: "Message sent succesfully! I'll get back to you soon.",
         });
         setFormData({ name: "", email: "", subject: "", message: "" });
       } else {
@@ -253,8 +267,37 @@ export default function ContactPage() {
     }
   };
 
+  // Show status message with fade-in effect
+  useEffect(() => {
+    if (status) {
+      // Trigger fade-in
+      setIsVisible(true);
+
+      // Start fade-out after 5 seconds
+      const fadeOutTimer = setTimeout(() => {
+        setIsVisible(false);
+      }, 5000);
+
+      // Remove message from DOM after fade-out completes
+      const removeTimer = setTimeout(() => {
+        setStatus(null);
+      }, 5500); // 5000ms + 500ms for fade-out animation
+
+      return () => {
+        clearTimeout(fadeOutTimer);
+        clearTimeout(removeTimer);
+      };
+    }
+  }, [status]);
+
   return (
     <>
+      {status && (
+        <StatusMessage type={status.type} isVisible={isVisible}>
+          {status.message}
+        </StatusMessage>
+      )}
+
       <Section center paddingY={theme.spacing.xxxl}>
         <Container>
           <PageTitle>Get In Touch</PageTitle>
@@ -293,10 +336,6 @@ export default function ContactPage() {
           </Grid>
         </Container>
       </Section>
-
-      {status && (
-        <StatusMessage type={status.type}>{status.message}</StatusMessage>
-      )}
 
       <Section>
         <Container narrow>

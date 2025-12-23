@@ -87,6 +87,8 @@ export default function Home() {
             src="/images/william_profile_pic.jpg"
             size="350px"
             alt="William Andrade"
+            width={350}
+            height={350}
           />
           <Subtitle>Full Stack Developer & Designer</Subtitle>
           <Subtitle>
