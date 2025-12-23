@@ -25,11 +25,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
             <Header />
             <main style={{ flex: "1" }}>
               {children}
-              <Analytics />
             </main>
             <Footer />
           </Providers>
         </EmotionRegistry>
+        <Analytics />
       </body>
     </html>
   );
