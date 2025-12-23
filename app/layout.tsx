@@ -3,6 +3,7 @@ import { Providers } from "@/app/providers";
 import { Footer } from "@/components/ui/Footer";
 import { Header } from "@/components/ui/Header";
 import { ReactNode } from "react";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata = {
   title: "William Andrade Site",
@@ -22,7 +23,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <EmotionRegistry>
           <Providers>
             <Header />
-            <main style={{ flex: "1" }}>{children}</main>
+            <main style={{ flex: "1" }}>
+              {children}
+              <Analytics />
+            </main>
             <Footer />
           </Providers>
         </EmotionRegistry>
