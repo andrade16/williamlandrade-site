@@ -8,6 +8,7 @@ import { Container, Section, Grid, Flex } from "@/components/layout";
 import { Avatar } from "@/components";
 import { theme } from "@/theme";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
+import { ROUTES } from "@/lib/constants";
 
 const HeroTitle = styled.h1`
   font-size: clamp(2.5rem, 8vw, 5rem);
@@ -132,7 +133,7 @@ export default function Home() {
             animate={mounted ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.9 }}
           >
-            <CTAButton href="/contact">Get In Touch</CTAButton>
+            <CTAButton href={ROUTES.CONTACT}>Get In Touch</CTAButton>
           </motion.div>
         </Container>
       </Section>
@@ -202,7 +203,7 @@ export default function Home() {
                   View some of my previous projects and let's discuss how we can
                   work together to create your next web application.
                 </p>
-                <CTAButton href="/projects">View Projects</CTAButton>
+                <CTAButton href={ROUTES.PROJECTS}>View Projects</CTAButton>
               </FeatureCard>
             </ScrollReveal>
           </Flex>

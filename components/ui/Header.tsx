@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import { Container, Flex } from "@/components/layout";
 import { theme } from "@/theme";
+import { ROUTES } from "@/lib/constants";
 
 const HeaderWrapper = styled.header`
   background-color: ${theme.colors.background.primary};
@@ -208,23 +209,23 @@ export function Header() {
       <HeaderWrapper>
         <Container>
           <Flex justify="space-between" align="center">
-            <LogoLink href="/">
+            <LogoLink href={ROUTES.HOME}>
               <Logo>William Andrade</Logo>
             </LogoLink>
 
             <Nav>
               <NavList>
                 <NavItem>
-                  <NavLink href="/">Home</NavLink>
+                  <NavLink href={ROUTES.HOME}>Home</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="/about">About</NavLink>
+                  <NavLink href={ROUTES.ABOUT}>About</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="/projects">Projects</NavLink>
+                  <NavLink href={ROUTES.PROJECTS}>Projects</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="/contact">Contact</NavLink>
+                  <NavLink href={ROUTES.CONTACT}>Contact</NavLink>
                 </NavItem>
               </NavList>
             </Nav>
@@ -265,22 +266,22 @@ export function Header() {
               </MobileMenuHeader>
               <MobileNavList>
                 <MobileNavItem>
-                  <MobileNavLink href="/" onClick={closeMobileMenu}>
+                  <MobileNavLink href={ROUTES.HOME} onClick={closeMobileMenu}>
                     Home
                   </MobileNavLink>
                 </MobileNavItem>
                 <MobileNavItem>
-                  <MobileNavLink href="/about" onClick={closeMobileMenu}>
+                  <MobileNavLink href={ROUTES.ABOUT} onClick={closeMobileMenu}>
                     About
                   </MobileNavLink>
                 </MobileNavItem>
                 <MobileNavItem>
-                  <MobileNavLink href="/projects" onClick={closeMobileMenu}>
+                  <MobileNavLink href={ROUTES.PROJECTS} onClick={closeMobileMenu}>
                     Projects
                   </MobileNavLink>
                 </MobileNavItem>
                 <MobileNavItem>
-                  <MobileNavLink href="/contact" onClick={closeMobileMenu}>
+                  <MobileNavLink href={ROUTES.CONTACT} onClick={closeMobileMenu}>
                     Contact
                   </MobileNavLink>
                 </MobileNavItem>

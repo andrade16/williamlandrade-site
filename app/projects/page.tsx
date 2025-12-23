@@ -1,11 +1,10 @@
 "use client";
 
 import styled from "@emotion/styled";
-import Image from "next/image";
-
 import { Container, Section, Grid } from "@/components/layout";
 import { theme } from "@/theme";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
+import { ROUTES } from "@/lib/constants";
 
 const PageTitle = styled.h1`
   font-size: clamp(2.5rem, 6vw, 4rem);
@@ -30,7 +29,7 @@ const Subtitle = styled.p`
   line-height: ${theme.typography.lineHeight.relaxed};
 `;
 
-const ProjectCard = styled.div`
+const Card = styled.div`
   background-color: ${theme.colors.background.secondary};
   border: 1px solid ${theme.colors.border.default};
   border-radius: 12px;
@@ -44,7 +43,7 @@ const ProjectCard = styled.div`
   }
 `;
 
-const ProjectImageWrapper = styled.div`
+const ImageWrapper = styled.div`
   position: relative;
   width: 100%;
   height: 400px;
@@ -66,30 +65,30 @@ const ProjectImageWrapper = styled.div`
   }
 `;
 
-const ProjectContent = styled.div`
+const Content = styled.div`
   padding: ${theme.spacing.xl};
 `;
 
-const ProjectTitle = styled.h3`
+const Title = styled.h3`
   color: ${theme.colors.text.primary};
   font-size: ${theme.typography.fontSize["2xl"]};
   margin-bottom: ${theme.spacing.md};
 `;
 
-const ProjectDescription = styled.p`
+const Description = styled.p`
   color: ${theme.colors.text.secondary};
   line-height: ${theme.typography.lineHeight.relaxed};
   margin-bottom: ${theme.spacing.lg};
 `;
 
-const ProjectMeta = styled.div`
+const Meta = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: ${theme.spacing.sm};
   margin-bottom: ${theme.spacing.lg};
 `;
 
-const ProjectTag = styled.span`
+const Tag = styled.span`
   padding: ${theme.spacing.xs} ${theme.spacing.sm};
   background-color: ${theme.colors.accent.main};
   color: ${theme.colors.text.primary};
@@ -98,7 +97,7 @@ const ProjectTag = styled.span`
   font-weight: ${theme.typography.fontWeight.medium};
 `;
 
-const ProjectLink = styled.a`
+const Link = styled.a`
   display: inline-block;
   color: ${theme.colors.accent.main};
   font-weight: ${theme.typography.fontWeight.semibold};
@@ -111,28 +110,28 @@ const ProjectLink = styled.a`
   }
 `;
 
-export default function ProjectsPage() {
-  const projects = [
-    {
-      id: 1,
-      title: "Eaze",
-      description:
-        "Led development of consumer-facing web experiences including brand pages and city landing pages that drove user engagement. Integrated third-party services for customer support and identity verification while building shared testing infrastructure. Worked primarily with React, TypeScript, and Next.js, with full-stack contributions across the platform.",
-      image: "/images/eaze_website.png",
-      tags: ["React", "TypeScript", "Next.js", "Redux"],
-      link: "https://www.eaze.com",
-    },
-    {
-      id: 2,
-      title: "Capital One",
-      description:
-        "Built next-generation transaction search and internal monitoring dashboards that improved customer and internal experiences. Led accessibility improvements and developed a shared React component library used across teams. Created backend APIs for ratings and reviews using React, TypeScript, NestJS, and Elasticsearch.",
-      image: "/images/capital_one_website.png",
-      tags: ["Angular", "TypeScript"],
-      link: "https://www.capitalone.com",
-    },
-  ];
+const projects = [
+  {
+    id: 1,
+    title: "Eaze",
+    description:
+      "Led development of consumer-facing web experiences including brand pages and city landing pages that drove user engagement. Integrated third-party services for customer support and identity verification while building shared testing infrastructure. Worked primarily with React, TypeScript, and Next.js, with full-stack contributions across the platform.",
+    image: "/images/eaze_website.png",
+    tags: ["React", "TypeScript", "Next.js", "Redux"],
+    link: "https://www.eaze.com",
+  },
+  {
+    id: 2,
+    title: "Capital One",
+    description:
+      "Built next-generation transaction search and internal monitoring dashboards that improved customer and internal experiences. Led accessibility improvements and developed a shared React component library used across teams. Created backend APIs for ratings and reviews using React, TypeScript, NestJS, and Elasticsearch.",
+    image: "/images/capital_one_website.png",
+    tags: ["Angular", "TypeScript"],
+    link: "https://www.capitalone.com",
+  },
+];
 
+export default function ProjectsPage() {
   return (
     <>
       <Section center paddingY={theme.spacing.xxxl}>
@@ -154,33 +153,27 @@ export default function ProjectsPage() {
           <Grid cols={1} mdCols={2} gap="3rem">
             {projects.map((project, index) => (
               <ScrollReveal key={project.id} delay={index * 0.2}>
-                <ProjectCard>
-                  <ProjectImageWrapper>
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      style={{ width: "100%", height: "100%" }}
-                    />
-                  </ProjectImageWrapper>
-                  <ProjectContent>
-                    <ProjectTitle>{project.title}</ProjectTitle>
-                    <ProjectMeta>
+                <Card>
+                  <ImageWrapper>
+                    <img src={project.image} alt={project.title} />
+                  </ImageWrapper>
+                  <Content>
+                    <Title>{project.title}</Title>
+                    <Meta>
                       {project.tags.map((tag) => (
-                        <ProjectTag key={tag}>{tag}</ProjectTag>
+                        <Tag key={tag}>{tag}</Tag>
                       ))}
-                    </ProjectMeta>
-                    <ProjectDescription>
-                      {project.description}
-                    </ProjectDescription>
-                    <ProjectLink
+                    </Meta>
+                    <Description>{project.description}</Description>
+                    <Link
                       href={project.link}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
                       View Website →
-                    </ProjectLink>
-                  </ProjectContent>
-                </ProjectCard>
+                    </Link>
+                  </Content>
+                </Card>
               </ScrollReveal>
             ))}
           </Grid>
@@ -210,7 +203,7 @@ export default function ProjectsPage() {
                 Let's discuss your next project and bring your ideas to life.
               </p>
               <a
-                href="/contact"
+                href={ROUTES.CONTACT}
                 style={{
                   display: "inline-block",
                   padding: `${theme.spacing.md} ${theme.spacing.xl}`,

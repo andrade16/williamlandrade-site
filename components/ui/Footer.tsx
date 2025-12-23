@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 
 import { Container } from "@/components/layout";
 import { theme } from "@/theme";
+import { ROUTES } from "@/lib/constants";
 
 const FooterWrapper = styled.footer`
   background-color: ${theme.colors.background.secondary};
@@ -71,13 +72,13 @@ export function Footer() {
             <FooterTitle>About</FooterTitle>
             <FooterList>
               <FooterListItem>
-                <FooterLink href="/about">About Me</FooterLink>
+                <FooterLink href={ROUTES.ABOUT}>About Me</FooterLink>
               </FooterListItem>
               <FooterListItem>
-                <FooterLink href="/about#skills">Skills</FooterLink>
+                <FooterLink href={`${ROUTES.ABOUT}#skills`}>Skills</FooterLink>
               </FooterListItem>
               <FooterListItem>
-                <FooterLink href="/about#experience">Experience</FooterLink>
+                <FooterLink href={`${ROUTES.ABOUT}#experience`}>Experience</FooterLink>
               </FooterListItem>
             </FooterList>
           </FooterSection>
@@ -115,16 +116,16 @@ export function Footer() {
             <FooterTitle>Quick Links</FooterTitle>
             <FooterList>
               <FooterListItem>
-                <FooterLink href="/">Home</FooterLink>
+                <FooterLink href={ROUTES.HOME}>Home</FooterLink>
               </FooterListItem>
               <FooterListItem>
-                <FooterLink href="/about">About</FooterLink>
+                <FooterLink href={ROUTES.ABOUT}>About</FooterLink>
               </FooterListItem>
               <FooterListItem>
-                <FooterLink href="/projects">Projects</FooterLink>
+                <FooterLink href={ROUTES.PROJECTS}>Projects</FooterLink>
               </FooterListItem>
               <FooterListItem>
-                <FooterLink href="/contact">Contact</FooterLink>
+                <FooterLink href={ROUTES.CONTACT}>Contact</FooterLink>
               </FooterListItem>
             </FooterList>
           </FooterSection>
