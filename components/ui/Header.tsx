@@ -1,6 +1,8 @@
 "use client";
 
 import styled from "@emotion/styled";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 import { Container, Flex } from "@/components/layout";
 import { theme } from "@/theme";
@@ -90,44 +92,203 @@ const MobileMenuButton = styled.button`
   display: block;
   background: none;
   border: none;
-  font-size: ${theme.typography.fontSize.xl};
+  font-size: ${theme.typography.fontSize["2xl"]};
   color: ${theme.colors.text.primary};
   padding: ${theme.spacing.xs};
+  cursor: pointer;
+  z-index: 1001;
 
   ${theme.mediaQueries.md} {
     display: none;
   }
 `;
 
+const MobileMenuOverlay = styled(motion.div)`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 999;
+  backdrop-filter: blur(4px);
+`;
+
+const MobileMenuSidebar = styled(motion.div)`
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 280px;
+  max-width: 85vw;
+  background-color: ${theme.colors.background.secondary};
+  border-left: 1px solid ${theme.colors.border.default};
+  z-index: 1000;
+  overflow-y: auto;
+  box-shadow: ${theme.shadows.xl};
+`;
+
+const MobileMenuHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: ${theme.spacing.lg};
+  border-bottom: 1px solid ${theme.colors.border.default};
+`;
+
+const MobileMenuTitle = styled.h2`
+  font-size: ${theme.typography.fontSize.xl};
+  font-weight: ${theme.typography.fontWeight.bold};
+  color: ${theme.colors.text.primary};
+  margin: 0;
+`;
+
+const CloseButton = styled.button`
+  background: none;
+  border: none;
+  font-size: ${theme.typography.fontSize["2xl"]};
+  color: ${theme.colors.text.primary};
+  cursor: pointer;
+  padding: ${theme.spacing.xs};
+  line-height: 1;
+`;
+
+const MobileNavList = styled.ul`
+  list-style: none;
+  padding: ${theme.spacing.lg} 0;
+  margin: 0;
+`;
+
+const MobileNavItem = styled.li`
+  margin: 0;
+`;
+
+const MobileNavLink = styled.a`
+  display: block;
+  padding: ${theme.spacing.md} ${theme.spacing.lg};
+  color: ${theme.colors.text.secondary};
+  font-weight: ${theme.typography.fontWeight.medium};
+  font-size: ${theme.typography.fontSize.lg};
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
+
+  &:hover {
+    color: ${theme.colors.text.primary};
+    background-color: ${theme.colors.background.primary};
+    border-left-color: ${theme.colors.accent.main};
+    text-decoration: none;
+  }
+`;
+
 export function Header() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // Prevent body scroll when menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isMobileMenuOpen]);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+  };
+
   return (
-    <HeaderWrapper>
-      <Container>
-        <Flex justify="space-between" align="center">
-          <LogoLink href="/">
-            <Logo>William Andrade</Logo>
-          </LogoLink>
+    <>
+      <HeaderWrapper>
+        <Container>
+          <Flex justify="space-between" align="center">
+            <LogoLink href="/">
+              <Logo>William Andrade</Logo>
+            </LogoLink>
 
-          <Nav>
-            <NavList>
-              <NavItem>
-                <NavLink href="/">Home</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="/about">About</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="/projects">Projects</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="/contact">Contact</NavLink>
-              </NavItem>
-            </NavList>
-          </Nav>
+            <Nav>
+              <NavList>
+                <NavItem>
+                  <NavLink href="/">Home</NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink href="/about">About</NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink href="/projects">Projects</NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink href="/contact">Contact</NavLink>
+                </NavItem>
+              </NavList>
+            </Nav>
 
-          <MobileMenuButton aria-label="Toggle menu">☰</MobileMenuButton>
-        </Flex>
-      </Container>
-    </HeaderWrapper>
+            <MobileMenuButton
+              onClick={toggleMobileMenu}
+              aria-label="Toggle menu"
+              aria-expanded={isMobileMenuOpen}
+            >
+              {isMobileMenuOpen ? "✕" : "☰"}
+            </MobileMenuButton>
+          </Flex>
+        </Container>
+      </HeaderWrapper>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <>
+            <MobileMenuOverlay
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={closeMobileMenu}
+            />
+            <MobileMenuSidebar
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "tween", duration: 0.3 }}
+            >
+              <MobileMenuHeader>
+                <MobileMenuTitle>Menu</MobileMenuTitle>
+                <CloseButton onClick={closeMobileMenu} aria-label="Close menu">
+                  ✕
+                </CloseButton>
+              </MobileMenuHeader>
+              <MobileNavList>
+                <MobileNavItem>
+                  <MobileNavLink href="/" onClick={closeMobileMenu}>
+                    Home
+                  </MobileNavLink>
+                </MobileNavItem>
+                <MobileNavItem>
+                  <MobileNavLink href="/about" onClick={closeMobileMenu}>
+                    About
+                  </MobileNavLink>
+                </MobileNavItem>
+                <MobileNavItem>
+                  <MobileNavLink href="/projects" onClick={closeMobileMenu}>
+                    Projects
+                  </MobileNavLink>
+                </MobileNavItem>
+                <MobileNavItem>
+                  <MobileNavLink href="/contact" onClick={closeMobileMenu}>
+                    Contact
+                  </MobileNavLink>
+                </MobileNavItem>
+              </MobileNavList>
+            </MobileMenuSidebar>
+          </>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
