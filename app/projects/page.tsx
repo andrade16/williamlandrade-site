@@ -1,6 +1,7 @@
 "use client";
 
 import styled from "@emotion/styled";
+import Image from "next/image";
 import { Container, Section, Grid } from "@/components/layout";
 import { theme } from "@/theme";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
@@ -155,7 +156,12 @@ export default function ProjectsPage() {
               <ScrollReveal key={project.id} delay={index * 0.2}>
                 <Card>
                   <ImageWrapper>
-                    <img src={project.image} alt={project.title} />
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      fill
+                      style={{ objectFit: "contain" }}
+                    />
                   </ImageWrapper>
                   <Content>
                     <Title>{project.title}</Title>
