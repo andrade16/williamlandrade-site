@@ -1,6 +1,7 @@
 "use client";
 
 import styled from "@emotion/styled";
+import { track } from "@vercel/analytics";
 
 import { Container, Section, Grid, Flex } from "@/components/layout";
 import { theme } from "@/theme";
@@ -336,6 +337,12 @@ export default function AboutPage() {
               <a
                 href="/resume.pdf"
                 download="William_Andrade_Resume.pdf"
+                onClick={() => {
+                  track("Resume Downloaded", {
+                    location: "About Page",
+                    timestamp: new Date().toISOString(),
+                  });
+                }}
                 style={{
                   display: "inline-block",
                   padding: `${theme.spacing.md} ${theme.spacing.xl}`,

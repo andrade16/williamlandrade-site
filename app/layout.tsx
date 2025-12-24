@@ -49,7 +49,11 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      style={{ scrollBehavior: "smooth" }}
+    >
       <body
         style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
       >
