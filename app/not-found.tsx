@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
-import { Container, Section, Flex } from "@/components/layout";
+import { Container, Section } from "@/components/layout";
 import { theme } from "@/theme";
 import { ROUTES } from "@/lib/constants";
 

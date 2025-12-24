@@ -2,6 +2,7 @@ import EmotionRegistry from "@/app/EmotionRegistry";
 import { Providers } from "@/app/providers";
 import { Footer } from "@/components/ui/Footer";
 import { Header } from "@/components/ui/Header";
+import { BackToTop } from "@/components/ui/BackToTop";
 import { ReactNode } from "react";
 import { Analytics } from "@vercel/analytics/next";
 
@@ -59,6 +60,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
               <Analytics />
             </main>
             <Footer />
+            <BackToTop />
           </Providers>
         </EmotionRegistry>
       </body>
