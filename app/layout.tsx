@@ -66,7 +66,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
               speed={500}
               shadow="0 0 10px #4f46e5,0 0 5px #4f46e5"
               zIndex={9999}
-              stopDelay={0}
             />
             <Header />
             <main style={{ flex: "1" }}>
