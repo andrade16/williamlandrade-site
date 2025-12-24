@@ -2,7 +2,6 @@
 
 import styled from "@emotion/styled";
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
 
 import { Container, Section } from "@/components/layout";
 import { theme } from "@/theme";
@@ -113,12 +112,6 @@ const Decoration = styled.div`
 `;
 
 export default function NotFound() {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
   return (
     <Section>
       <Container>
@@ -138,24 +131,24 @@ export default function NotFound() {
 
           <NotFoundContent>
             <motion.div
-              initial={false}
-              animate={mounted ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
             >
               <NotFoundCode>404</NotFoundCode>
             </motion.div>
 
             <motion.div
-              initial={false}
-              animate={mounted ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
             >
               <NotFoundTitle>Page Not Found</NotFoundTitle>
             </motion.div>
 
             <motion.div
-              initial={false}
-              animate={mounted ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5 }}
             >
               <NotFoundDescription>
@@ -165,8 +158,8 @@ export default function NotFound() {
             </motion.div>
 
             <motion.div
-              initial={false}
-              animate={mounted ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.7 }}
             >
               <ButtonGroup>

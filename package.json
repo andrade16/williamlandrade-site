@@ -22,6 +22,7 @@
     "@vercel/analytics": "^1.6.1",
     "framer-motion": "^12.23.26",
     "next": "^16.0.10",
+    "nextjs-toploader": "^3.9.17",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
     "react-redux": "^9.2.0",

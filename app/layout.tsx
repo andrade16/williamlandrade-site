@@ -3,7 +3,7 @@ import { Providers } from "@/app/providers";
 import { Footer } from "@/components/ui/Footer";
 import { Header } from "@/components/ui/Header";
 import { BackToTop } from "@/components/ui/BackToTop";
-import { LoadingIndicator } from "@/components/ui/LoadingIndicator";
+import NextTopLoader from "nextjs-toploader";
 import { ReactNode } from "react";
 import { Analytics } from "@vercel/analytics/next";
 
@@ -55,7 +55,19 @@ export default function RootLayout({ children }: RootLayoutProps) {
       >
         <EmotionRegistry>
           <Providers>
-            <LoadingIndicator />
+            <NextTopLoader
+              color="#4f46e5"
+              initialPosition={0.08}
+              crawlSpeed={300}
+              height={5}
+              crawl={true}
+              showSpinner={false}
+              easing="ease"
+              speed={500}
+              shadow="0 0 10px #4f46e5,0 0 5px #4f46e5"
+              zIndex={9999}
+              stopDelay={0}
+            />
             <Header />
             <main style={{ flex: "1" }}>
               {children}
