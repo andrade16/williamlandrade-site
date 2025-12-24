@@ -3,6 +3,7 @@ import { Providers } from "@/app/providers";
 import { Footer } from "@/components/ui/Footer";
 import { Header } from "@/components/ui/Header";
 import { BackToTop } from "@/components/ui/BackToTop";
+import { LoadingIndicator } from "@/components/ui/LoadingIndicator";
 import { ReactNode } from "react";
 import { Analytics } from "@vercel/analytics/next";
 
@@ -54,6 +55,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       >
         <EmotionRegistry>
           <Providers>
+            <LoadingIndicator />
             <Header />
             <main style={{ flex: "1" }}>
               {children}
