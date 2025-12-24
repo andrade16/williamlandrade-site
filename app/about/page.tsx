@@ -190,9 +190,9 @@ export default function AboutPage() {
                   <li>Node.js & Express</li>
                   <li>Python</li>
                   <li>RESTful APIs</li>
-                  <li>Database Design</li>
-                  <li>Authentication & Security</li>
+                  <li>API Design</li>
                   <li>API Integration</li>
+                  <li>Authentication & Security</li>
                 </ul>
               </SkillCard>
             </ScrollReveal>
