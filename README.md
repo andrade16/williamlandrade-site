@@ -11,6 +11,10 @@ A modern, responsive portfolio website showcasing professional experience, proje
 - **Dark Theme**: Sleek dark theme with gradient accents
 - **SEO Optimized**: Built with Next.js for optimal search engine visibility
 - **Performance**: Optimized builds with focus on speed and user experience
+- **Custom 404 Page**: Branded error page with navigation options
+- **Back to Top Button**: Smooth scroll-to-top functionality on all pages
+- **Centralized Routing**: Type-safe route constants for consistent navigation
+- **Mobile Navigation**: Hamburger menu with slide-out sidebar for mobile devices
 
 ## Tech Stack
 
@@ -22,130 +26,76 @@ A modern, responsive portfolio website showcasing professional experience, proje
 - **Email Service**: Resend
 - **Code Quality**: ESLint, Prettier
 
-## Prerequisites
-
-Before you begin, ensure you have the following installed:
-
-- Node.js (v18 or higher)
-- npm or yarn package manager
-
-## Installation
-
-1. Clone the repository:
-
-```bash
-git clone https://github.com/yourusername/williamlandrade-site.git
-cd williamlandrade-site
-```
-
-2. Install dependencies:
-
-```bash
-npm install
-```
-
-3. Create a `.env.local` file in the root directory and add your environment variables:
-
-```env
-RESEND_API_KEY=your_resend_api_key_here
-```
-
-## Development
-
-Run the development server:
-
-```bash
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
-
-### Available Scripts
-
-- `npm run dev` - Starts the development server
-- `npm run build` - Creates an optimized production build
-- `npm start` - Starts the production server
-- `npm run lint` - Runs ESLint for code quality
-- `npm run format` - Formats code using Prettier
-- `npm run format:check` - Checks code formatting
-
-## Building for Production
-
-Create an optimized production build:
-
-```bash
-npm run build
-```
-
-Test the production build locally:
-
-```bash
-npm start
-```
-
 ## Deployment
 
-### Deploy to Vercel (Recommended)
+### Deploy via Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com).
+The easiest way to deploy this Next.js app is to use the [Vercel Platform](https://vercel.com).
 
-1. Push your code to a Git repository (GitHub, GitLab, or Bitbucket)
-2. Import your repository to Vercel
+1. Pushed my code to a Git repository
+2. Imported my repository to Vercel
 3. Add environment variables in Vercel dashboard:
    - `RESEND_API_KEY`
+   - `CONTACT_EMAIL`
 4. Deploy!
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new)
 
 ## Project Structure
 
 ```
 williamlandrade-site/
-├── app/                     # Next.js app directory
-│   ├── about/               # About page
-│   ├── contact/             # Contact page
-│   ├── projects/            # Projects page
-│   ├── api/                 # API routes
-│   │   └── contact/         # Contact form API
-│   ├── layout.tsx           # Root layout
-│   └── page.tsx             # Home page
-├── components/              # React components
-│   ├── animations/          # Animation components
-│   │   ├── ScrollReveal.tsx
-│   │   └── AnimatedCounter.tsx
-│   ├── layout/              # Layout components
-│   │   ├── Container.tsx
-│   │   ├── Section.tsx
-│   │   ├── Grid.tsx
-│   │   └── Flex.tsx
-│   └── ui/                  # UI components
-│       ├── Header.tsx
-│       ├── Footer.tsx
-│       └── Avatar.tsx
-├── public/                 # Static assets
-│   └── images/             # Images and screenshots
-├── theme/                  # Theme configuration
-├── .env.local              # Environment variables (not in repo)
-├── next.config.js          # Next.js configuration
-├── tsconfig.json           # TypeScript configuration
-└── package.json            # Project dependencies
+├── app/                      # Next.js app directory
+│   ├── about/                # About page
+│   ├── api/                  # API routes
+│   │   └── contact/          # Contact form API endpoint
+│   ├── contact/              # Contact page
+│   ├── projects/             # Projects page
+│   ├── EmotionRegistry.tsx   # Emotion CSS-in-JS SSR configuration
+│   ├── icon.svg              # Favicon and app icon
+│   ├── layout.tsx            # Root layout with metadata
+│   ├── not-found.tsx         # Custom 404 page
+│   ├── page.tsx              # Home page
+│   └── providers.tsx         # Client-side providers
+├── components/               # React components
+│   ├── animations/           # Animation components
+│   │   ├── ScrollReveal.tsx  # Scroll-triggered reveal animation
+│   │   └── AnimatedCounter.tsx # Number counter animation
+│   ├── layout/               # Layout components
+│   │   ├── Container.tsx     # Content container wrapper
+│   │   ├── Section.tsx       # Page section wrapper
+│   │   ├── Grid.tsx          # Grid layout component
+│   │   └── Flex.tsx          # Flexbox layout component
+│   └── ui/                   # UI components
+│       ├── Header.tsx        # Navigation header with mobile menu
+│       ├── Footer.tsx        # Site footer
+│       ├── Avatar.tsx        # Profile image component
+│       └── BackToTop.tsx     # Scroll-to-top button
+├── lib/                      # Utility libraries
+│   └── constants.ts          # Application constants (routes, etc.)
+├── public/                   # Static assets
+│   ├── images/               # Images and screenshots
+│   └── resume.pdf            # Downloadable resume
+├── theme/                    # Theme configuration
+│   └── index.ts              # Theme tokens (colors, typography, spacing)
+├── .env.local                # Environment variables (not in repo)
+├── tsconfig.json             # TypeScript configuration
+└── package.json              # Project dependencies
 
 ```
 
 ## Environment Variables
 
-Create a `.env.local` file in the root directory with the following variables:
+Created a `.env.local` file in the root directory with the following variables:
 
 ```env
 # Resend API Key for contact form
-RESEND_API_KEY=your_resend_api_key_here
+RESEND_API_KEY=my_resend_api_key_here
 ```
 
 To get a Resend API key:
 
-1. Sign up at [resend.com](https://resend.com)
-2. Create a new API key in your dashboard
-3. Add the key to your `.env.local` file
+1. Signed up at [resend.com](https://resend.com)
+2. Create a new API key in my dashboard
+3. Added the key to my `.env.local` file
 
 ## Pages
 
@@ -153,27 +103,11 @@ To get a Resend API key:
 - **About** (`/about`) - Professional background, skills, and experience timeline
 - **Projects** (`/projects`) - Showcase of professional projects with descriptions
 - **Contact** (`/contact`) - Contact form with email integration
-
-## Customization
-
-### Update Personal Information
-
-1. **Contact Information**: Update email, phone, and social links in:
-   - `app/contact/page.tsx`
-   - `components/ui/Footer.tsx`
-
-2. **Experience**: Update work history in:
-   - `app/about/page.tsx` (Experience section)
-
-3. **Projects**: Update project details in:
-   - `app/projects/page.tsx` (projects array)
-
-4. **Profile Image**: Replace the avatar image at:
-   - `public/images/william_profile_pic.jpg`
+- **404** (any invalid route) - Custom error page with navigation options
 
 ### Theme Customization
 
-Modify theme settings in `theme/index.ts`:
+You can modify theme settings in `theme/index.ts`:
 
 - Colors
 - Typography
@@ -198,15 +132,6 @@ This site is optimized for performance with:
 - Safari (latest)
 - Edge (latest)
 
-## Contributing
-
-This is a personal portfolio website. If you'd like to use it as a template:
-
-1. Fork the repository
-2. Update personal information
-3. Customize styling and content
-4. Deploy to your preferred platform
-
 ## License
 
 This project is open source and available under the [MIT License](LICENSE).
@@ -217,7 +142,7 @@ William Andrade
 
 - Email: andrade.william61@gmail.com
 - LinkedIn: [william-andrade](https://www.linkedin.com/in/william-andrade/)
-- GitHub: [andrade16](https://github.com/andrade16)
+- GitHub: [andrade16](https://github.com/andrade16) or [williamlandrade](https://github.com/williamlandrade)
 
 ## Acknowledgments
 
