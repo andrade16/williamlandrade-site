@@ -3,6 +3,7 @@
 import styled from "@emotion/styled";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { usePathname } from "next/navigation";
 
 import { Container, Flex } from "@/components/layout";
 import { theme } from "@/theme";
@@ -62,8 +63,9 @@ const NavList = styled.ul`
 
 const NavItem = styled.li``;
 
-const NavLink = styled.a`
-  color: ${theme.colors.text.secondary};
+const NavLink = styled.a<{ isActive?: boolean }>`
+  color: ${(props) =>
+    props.isActive ? theme.colors.text.primary : theme.colors.text.secondary};
   font-weight: ${theme.typography.fontWeight.medium};
   transition: all 0.2s ease;
   position: relative;
@@ -78,7 +80,7 @@ const NavLink = styled.a`
     position: absolute;
     bottom: -4px;
     left: 0;
-    width: 0;
+    width: ${(props) => (props.isActive ? "100%" : "0")};
     height: 2px;
     background-color: ${theme.colors.accent.main};
     transition: width 0.2s ease;
@@ -164,14 +166,18 @@ const MobileNavItem = styled.li`
   margin: 0;
 `;
 
-const MobileNavLink = styled.a`
+const MobileNavLink = styled.a<{ isActive?: boolean }>`
   display: block;
   padding: ${theme.spacing.md} ${theme.spacing.lg};
-  color: ${theme.colors.text.secondary};
+  color: ${(props) =>
+    props.isActive ? theme.colors.text.primary : theme.colors.text.secondary};
   font-weight: ${theme.typography.fontWeight.medium};
   font-size: ${theme.typography.fontSize.lg};
   transition: all 0.2s ease;
-  border-left: 3px solid transparent;
+  border-left: 3px solid ${(props) =>
+    props.isActive ? theme.colors.accent.main : "transparent"};
+  background-color: ${(props) =>
+    props.isActive ? theme.colors.background.primary : "transparent"};
 
   &:hover {
     color: ${theme.colors.text.primary};
@@ -183,6 +189,7 @@ const MobileNavLink = styled.a`
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   // Prevent body scroll when menu is open
   useEffect(() => {
@@ -216,16 +223,33 @@ export function Header() {
             <Nav>
               <NavList>
                 <NavItem>
-                  <NavLink href={ROUTES.HOME}>Home</NavLink>
+                  <NavLink href={ROUTES.HOME} isActive={pathname === ROUTES.HOME}>
+                    Home
+                  </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href={ROUTES.ABOUT}>About</NavLink>
+                  <NavLink
+                    href={ROUTES.ABOUT}
+                    isActive={pathname === ROUTES.ABOUT}
+                  >
+                    About
+                  </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href={ROUTES.PROJECTS}>Projects</NavLink>
+                  <NavLink
+                    href={ROUTES.PROJECTS}
+                    isActive={pathname === ROUTES.PROJECTS}
+                  >
+                    Projects
+                  </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href={ROUTES.CONTACT}>Contact</NavLink>
+                  <NavLink
+                    href={ROUTES.CONTACT}
+                    isActive={pathname === ROUTES.CONTACT}
+                  >
+                    Contact
+                  </NavLink>
                 </NavItem>
               </NavList>
             </Nav>
@@ -266,22 +290,38 @@ export function Header() {
               </MobileMenuHeader>
               <MobileNavList>
                 <MobileNavItem>
-                  <MobileNavLink href={ROUTES.HOME} onClick={closeMobileMenu}>
+                  <MobileNavLink
+                    href={ROUTES.HOME}
+                    onClick={closeMobileMenu}
+                    isActive={pathname === ROUTES.HOME}
+                  >
                     Home
                   </MobileNavLink>
                 </MobileNavItem>
                 <MobileNavItem>
-                  <MobileNavLink href={ROUTES.ABOUT} onClick={closeMobileMenu}>
+                  <MobileNavLink
+                    href={ROUTES.ABOUT}
+                    onClick={closeMobileMenu}
+                    isActive={pathname === ROUTES.ABOUT}
+                  >
                     About
                   </MobileNavLink>
                 </MobileNavItem>
                 <MobileNavItem>
-                  <MobileNavLink href={ROUTES.PROJECTS} onClick={closeMobileMenu}>
+                  <MobileNavLink
+                    href={ROUTES.PROJECTS}
+                    onClick={closeMobileMenu}
+                    isActive={pathname === ROUTES.PROJECTS}
+                  >
                     Projects
                   </MobileNavLink>
                 </MobileNavItem>
                 <MobileNavItem>
-                  <MobileNavLink href={ROUTES.CONTACT} onClick={closeMobileMenu}>
+                  <MobileNavLink
+                    href={ROUTES.CONTACT}
+                    onClick={closeMobileMenu}
+                    isActive={pathname === ROUTES.CONTACT}
+                  >
                     Contact
                   </MobileNavLink>
                 </MobileNavItem>
