@@ -266,7 +266,7 @@ export default function AboutPage() {
 
           <ScrollReveal delay={0.2} direction="left">
             <ExperienceCard>
-              <h3>Senior Full-stack Software Engineer</h3>
+              <h3>Senior Software Engineer</h3>
               <div className="role">Capital One</div>
               <div className="period">December 2018 - September 2021</div>
               <p>

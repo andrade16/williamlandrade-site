@@ -9,14 +9,14 @@ import { Analytics } from "@vercel/analytics/next";
 
 export const metadata = {
   title: {
-    default: "William Andrade | Full-stack Web Developer",
+    default: "William Andrade | Fullstack Web Developer",
     template: "%s | William Andrade",
   },
   description:
-    "Full-stack Web Developer specializing in React, TypeScript, Next.js, and modern web technologies. 9+ years of experience building scalable applications.",
+    "Fullstack Web Developer specializing in React, TypeScript, Next.js, and modern web technologies. 9+ years of experience building scalable applications.",
   keywords: [
     "William Andrade",
-    "Full-stack Developer",
+    "Fullstack Developer",
     "React Developer",
     "TypeScript",
     "Next.js",
