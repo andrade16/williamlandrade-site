@@ -8,6 +8,7 @@ import { GitHubContributionGraph } from "@/components/ui/GitHubContributionGraph
 import { theme } from "@/theme";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { ROUTES } from "@/lib/constants";
+import { GitHubStats } from "@/components/ui/GitHubStats";
 
 const PageTitle = styled.h1`
   font-size: clamp(2.5rem, 6vw, 4rem);
@@ -237,6 +238,7 @@ export default function ProjectsPage() {
             <SectionLabel>Recent GitHub Activity</SectionLabel>
           </ScrollReveal>
           <GitHubContributionGraph />
+          <GitHubStats />
         </Container>
       </Section>
 

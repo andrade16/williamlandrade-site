@@ -12,7 +12,7 @@ const GraphContainer = styled.div`
   border-radius: 12px;
   padding: ${theme.spacing.xl};
   max-width: 900px;
-  margin: 0 auto;
+  margin: 0 auto ${theme.spacing.xxxl};
   overflow: hidden;
 `;
 
