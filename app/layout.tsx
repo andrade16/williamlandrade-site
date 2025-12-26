@@ -8,6 +8,7 @@ import { ReactNode } from "react";
 import { Analytics } from "@vercel/analytics/next";
 
 export const metadata = {
+  metadataBase: new URL("https://williamlandrade.vercel.app"),
   title: {
     default: "William Andrade | Fullstack Web Developer",
     template: "%s | William Andrade",
@@ -29,11 +30,19 @@ export const metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://williamandrade.com",
+    url: "https://williamlandrade.vercel.app",
     siteName: "William Andrade",
     title: "William Andrade | Full-stack Web Developer",
     description:
       "Full-stack Web Developer specializing in React, TypeScript, Next.js, and modern web technologies.",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "William Andrade | Full-stack Web Developer",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
