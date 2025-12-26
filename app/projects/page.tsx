@@ -30,6 +30,32 @@ const Subtitle = styled.p`
   line-height: ${theme.typography.lineHeight.relaxed};
 `;
 
+const SectionLabel = styled.h2`
+  font-size: ${theme.typography.fontSize["3xl"]};
+  color: ${theme.colors.text.primary};
+  margin-bottom: ${theme.spacing.xl};
+  text-align: center;
+  position: relative;
+
+  &::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(
+      90deg,
+      ${theme.colors.accent.main} 0%,
+      ${theme.colors.accent.light} 100%
+    );
+    margin: ${theme.spacing.md} auto 0;
+    border-radius: 2px;
+  }
+
+  ${theme.mediaQueries.md} {
+    font-size: ${theme.typography.fontSize["4xl"]};
+  }
+`;
+
 const Card = styled.div`
   background-color: ${theme.colors.background.secondary};
   border: 1px solid ${theme.colors.border.default};
@@ -111,7 +137,7 @@ const Link = styled.a`
   }
 `;
 
-const projects = [
+const professionalProjects = [
   {
     id: 1,
     title: "Eaze",
@@ -132,6 +158,18 @@ const projects = [
   },
 ];
 
+const personalProjects: typeof professionalProjects = [
+  // Add your personal projects here
+  {
+    id: 3,
+    title: "Personal Project Name",
+    description: "Description of your personal project...",
+    image: "/images/project_name.png",
+    tags: ["React", "Next.js"],
+    link: "https://project-link.com",
+  },
+];
+
 export default function ProjectsPage() {
   return (
     <>
@@ -149,10 +187,14 @@ export default function ProjectsPage() {
         </Container>
       </Section>
 
+      {/* Professional Projects Section */}
       <Section bgColor={theme.colors.background.secondary}>
         <Container>
+          <ScrollReveal>
+            <SectionLabel>Professional Projects</SectionLabel>
+          </ScrollReveal>
           <Grid cols={1} mdCols={2} gap="3rem">
-            {projects.map((project, index) => (
+            {professionalProjects.map((project, index) => (
               <ScrollReveal key={project.id} delay={index * 0.2}>
                 <Card>
                   <ImageWrapper>
@@ -185,6 +227,49 @@ export default function ProjectsPage() {
           </Grid>
         </Container>
       </Section>
+
+      {/* Personal Projects Section */}
+      {personalProjects.length > 0 && (
+        <Section>
+          <Container>
+            <ScrollReveal>
+              <SectionLabel>Personal Projects</SectionLabel>
+            </ScrollReveal>
+            <Grid cols={1} mdCols={2} gap="3rem">
+              {personalProjects.map((project, index) => (
+                <ScrollReveal key={project.id} delay={index * 0.2}>
+                  <Card>
+                    <ImageWrapper>
+                      <Image
+                        src={project.image}
+                        alt={project.title}
+                        fill
+                        style={{ objectFit: "contain" }}
+                      />
+                    </ImageWrapper>
+                    <Content>
+                      <Title>{project.title}</Title>
+                      <Meta>
+                        {project.tags.map((tag) => (
+                          <Tag key={tag}>{tag}</Tag>
+                        ))}
+                      </Meta>
+                      <Description>{project.description}</Description>
+                      <Link
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        View Website →
+                      </Link>
+                    </Content>
+                  </Card>
+                </ScrollReveal>
+              ))}
+            </Grid>
+          </Container>
+        </Section>
+      )}
 
       <Section>
         <Container>
