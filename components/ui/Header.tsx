@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 import { Container, Flex } from "@/components/layout";
 import { theme } from "@/theme";
@@ -27,21 +28,22 @@ const HeaderWrapper = styled.header`
 const LogoLink = styled.a`
   text-decoration: none;
   color: inherit;
+  display: flex;
+  align-items: center;
+  transition: transform 0.2s ease;
 
   &:hover {
     text-decoration: none;
+    transform: scale(1.05);
   }
 `;
 
-const Logo = styled.h1`
-  font-size: ${theme.typography.fontSize.xl};
-  font-weight: ${theme.typography.fontWeight.bold};
-  color: ${theme.colors.text.primary};
-  margin: 0;
-  cursor: pointer;
+const LogoImage = styled(Image)`
+  width: auto;
+  height: 40px;
 
   ${theme.mediaQueries.md} {
-    font-size: ${theme.typography.fontSize["2xl"]};
+    height: 48px;
   }
 `;
 
@@ -217,7 +219,12 @@ export function Header() {
         <Container>
           <Flex justify="space-between" align="center">
             <LogoLink href={ROUTES.HOME}>
-              <Logo>William Andrade</Logo>
+              <LogoImage
+                src="/icon.svg"
+                alt="William Andrade"
+                width={48}
+                height={48}
+              />
             </LogoLink>
 
             <Nav>

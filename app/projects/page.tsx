@@ -9,6 +9,7 @@ import { theme } from "@/theme";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { ROUTES } from "@/lib/constants";
 import { GitHubStats } from "@/components/ui/GitHubStats";
+import { InfoTooltip } from "@/components/ui/InfoTooltip";
 
 const PageTitle = styled.h1`
   font-size: clamp(2.5rem, 6vw, 4rem);
@@ -39,10 +40,16 @@ const SectionLabel = styled.h2`
   margin-bottom: ${theme.spacing.xl};
   text-align: center;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &::after {
     content: "";
-    display: block;
+    position: absolute;
+    bottom: -${theme.spacing.md};
+    left: 50%;
+    transform: translateX(-50%);
     width: 60px;
     height: 3px;
     background: linear-gradient(
@@ -50,7 +57,6 @@ const SectionLabel = styled.h2`
       ${theme.colors.accent.main} 0%,
       ${theme.colors.accent.light} 100%
     );
-    margin: ${theme.spacing.md} auto 0;
     border-radius: 2px;
   }
 
@@ -235,7 +241,10 @@ export default function ProjectsPage() {
       <Section>
         <Container>
           <ScrollReveal>
-            <SectionLabel>Recent GitHub Activity</SectionLabel>
+            <SectionLabel>
+              Recent GitHub Activity
+              <InfoTooltip content="Contribution graph data is combined from personal and work github accounts" />
+            </SectionLabel>
           </ScrollReveal>
           <GitHubContributionGraph />
           <GitHubStats />

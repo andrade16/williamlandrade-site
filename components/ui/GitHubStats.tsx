@@ -92,7 +92,6 @@ export function GitHubStats() {
         return res.json();
       })
       .then((data) => {
-        console.log("STATS DATA ===> ", data);
         setStats(data);
         setLoading(false);
       })
@@ -113,8 +112,6 @@ export function GitHubStats() {
       </ErrorState>
     );
   }
-
-  console.log("STATS ==> ", stats);
 
   return (
     <StatsContainer>
