@@ -17,11 +17,6 @@ export async function POST(req: Request) {
   try {
     const body: ContactFormData = await req.json();
     const { name, email, subject, message } = body;
-    console.log("NAME: ", name);
-    console.log("EMAIL: ", email);
-    console.log("MESSAGE: ", message);
-    console.log("SUBJECT", subject);
-    console.log("TESTING: ", process.env.CONTACT_EMAIL);
 
     // Validate all required inputs
     if (!name || !email || !message) {

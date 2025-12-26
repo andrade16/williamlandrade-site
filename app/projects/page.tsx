@@ -3,6 +3,8 @@
 import styled from "@emotion/styled";
 import Image from "next/image";
 import { Container, Section, Grid } from "@/components/layout";
+import { GitHubFeed } from "@/components/ui/GitHubFeed";
+import { GitHubContributionGraph } from "@/components/ui/GitHubContributionGraph";
 import { theme } from "@/theme";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { ROUTES } from "@/lib/constants";
@@ -229,47 +231,20 @@ export default function ProjectsPage() {
       </Section>
 
       {/* Personal Projects Section */}
-      {personalProjects.length > 0 && (
-        <Section>
-          <Container>
-            <ScrollReveal>
-              <SectionLabel>Personal Projects</SectionLabel>
-            </ScrollReveal>
-            <Grid cols={1} mdCols={2} gap="3rem">
-              {personalProjects.map((project, index) => (
-                <ScrollReveal key={project.id} delay={index * 0.2}>
-                  <Card>
-                    <ImageWrapper>
-                      <Image
-                        src={project.image}
-                        alt={project.title}
-                        fill
-                        style={{ objectFit: "contain" }}
-                      />
-                    </ImageWrapper>
-                    <Content>
-                      <Title>{project.title}</Title>
-                      <Meta>
-                        {project.tags.map((tag) => (
-                          <Tag key={tag}>{tag}</Tag>
-                        ))}
-                      </Meta>
-                      <Description>{project.description}</Description>
-                      <Link
-                        href={project.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        View Website →
-                      </Link>
-                    </Content>
-                  </Card>
-                </ScrollReveal>
-              ))}
-            </Grid>
-          </Container>
-        </Section>
-      )}
+      <Section>
+        <Container>
+          <ScrollReveal>
+            <SectionLabel>Recent GitHub Activity</SectionLabel>
+          </ScrollReveal>
+          <GitHubContributionGraph />
+        </Container>
+      </Section>
+
+      {/* <Section>
+        <Container>
+          <GitHubFeed />
+        </Container>
+      </Section> */}
 
       <Section>
         <Container>
