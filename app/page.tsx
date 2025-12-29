@@ -74,6 +74,14 @@ const FeatureCard = styled.div`
   }
 `;
 
+const IconWrapper = styled(motion.div)`
+  font-size: ${theme.typography.fontSize["5xl"]};
+  margin-bottom: ${theme.spacing.md};
+  display: inline-block;
+  line-height: 1;
+  filter: drop-shadow(0 4px 8px rgba(79, 70, 229, 0.3));
+`;
+
 const SectionTitle = styled.h2`
   text-align: center;
   margin-bottom: ${theme.spacing.xxl};
@@ -139,6 +147,12 @@ export default function Home() {
           <Grid cols={1} mdCols={2} lgCols={3} gap="2rem">
             <ScrollReveal delay={0.1}>
               <FeatureCard>
+                <IconWrapper
+                  whileHover={{ scale: 1.2, rotate: 10 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  📱
+                </IconWrapper>
                 <h3>Responsive Design</h3>
                 <p>
                   Mobile-first approach ensuring seamless experiences across all
@@ -148,6 +162,12 @@ export default function Home() {
             </ScrollReveal>
             <ScrollReveal delay={0.2}>
               <FeatureCard>
+                <IconWrapper
+                  whileHover={{ scale: 1.2, rotate: -10 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  ⚛️
+                </IconWrapper>
                 <h3>Modern Stack</h3>
                 <p>
                   Using Next.js, React, TypeScript, and modern CSS-in-JS
@@ -157,24 +177,48 @@ export default function Home() {
             </ScrollReveal>
             <ScrollReveal delay={0.3}>
               <FeatureCard>
+                <IconWrapper
+                  whileHover={{ scale: 1.2, rotate: 10 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  ⚡
+                </IconWrapper>
                 <h3>Performance</h3>
                 <p>Optimized builds with focus on speed and user experience</p>
               </FeatureCard>
             </ScrollReveal>
             <ScrollReveal delay={0.1}>
               <FeatureCard>
+                <IconWrapper
+                  whileHover={{ scale: 1.2, rotate: -10 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  ✨
+                </IconWrapper>
                 <h3>Clean Code</h3>
                 <p>Well-structured, maintainable, and scalable architecture</p>
               </FeatureCard>
             </ScrollReveal>
             <ScrollReveal delay={0.2}>
               <FeatureCard>
+                <IconWrapper
+                  whileHover={{ scale: 1.2, rotate: 10 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  🎨
+                </IconWrapper>
                 <h3>Design Systems</h3>
                 <p>Comprehensive theming with reusable component libraries</p>
               </FeatureCard>
             </ScrollReveal>
             <ScrollReveal delay={0.3}>
               <FeatureCard>
+                <IconWrapper
+                  whileHover={{ scale: 1.2, rotate: -10 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  🎯
+                </IconWrapper>
                 <h3>User Experience</h3>
                 <p>Smooth animations and intuitive interactions</p>
               </FeatureCard>
