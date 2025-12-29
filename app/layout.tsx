@@ -6,6 +6,7 @@ import { BackToTop } from "@/components/ui/BackToTop";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import { ReactNode } from "react";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata = {
   metadataBase: new URL("https://williamlandrade.vercel.app"),
@@ -73,6 +74,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
               <main style={{ flex: "1" }}>
                 {children}
                 <Analytics />
+                <SpeedInsights />
               </main>
               <Footer />
               <BackToTop />
