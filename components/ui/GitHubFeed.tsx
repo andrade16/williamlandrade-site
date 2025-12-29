@@ -142,7 +142,6 @@ export function GitHubFeed() {
         return res.json();
       })
       .then((data) => {
-        console.log("DATA: ", data);
         setActivity(data);
         setLoading(false);
       })

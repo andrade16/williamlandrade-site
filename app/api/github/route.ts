@@ -4,11 +4,9 @@ import { getGitHubActivity } from "@/lib/github";
 export async function GET() {
   // Use your GitHub username - can also be moved to environment variable
   const username = process.env.GITHUB_PERSONAL_USERNAME || "williamlandrade";
-  console.log("USERNAME ===> ", username);
 
   try {
     const activity = await getGitHubActivity(username);
-    console.log("GitHub activity fetched:", activity);
 
     // Limit to last 10 events and format the data
     const formattedActivity = activity.slice(0, 10).map((event: any) => ({

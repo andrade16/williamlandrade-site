@@ -6,7 +6,6 @@ export async function GET() {
 
   try {
     const stats = await getGitHubStats(username);
-    console.log("API Route - Stats returned:", JSON.stringify(stats, null, 2));
     return NextResponse.json(stats);
   } catch (error) {
     console.error("Failed to fetch GitHub stats:", error);
