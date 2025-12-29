@@ -1,7 +1,11 @@
 "use client";
 
-import React, { ChangeEvent, FormEvent, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import styled from "@emotion/styled";
+
+import { contactFormSchema, ContactFormData } from "@/lib/validations/contact";
 
 import { Container, Section, Grid, Flex } from "@/components/layout";
 import { theme } from "@/theme";
@@ -89,11 +93,12 @@ const Label = styled.label`
   font-size: ${theme.typography.fontSize.md};
 `;
 
-const Input = styled.input`
+const Input = styled.input<{ hasError?: boolean }>`
   width: 100%;
   padding: ${theme.spacing.md};
   background-color: ${theme.colors.background.secondary};
-  border: 1px solid ${theme.colors.border.default};
+  border: 1px solid
+    ${(props) => (props.hasError ? "#ef4444" : theme.colors.border.default)};
   border-radius: 8px;
   color: ${theme.colors.text.primary};
   font-size: ${theme.typography.fontSize.md};
@@ -101,8 +106,11 @@ const Input = styled.input`
 
   &:focus {
     outline: none;
-    border-color: ${theme.colors.accent.main};
-    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+    border-color: ${(props) =>
+      props.hasError ? "#ef4444" : theme.colors.accent.main};
+    box-shadow: 0 0 0 3px
+      ${(props) =>
+        props.hasError ? "rgba(239, 68, 68, 0.1)" : "rgba(79, 70, 229, 0.1)"};
   }
 
   &::placeholder {
@@ -110,11 +118,12 @@ const Input = styled.input`
   }
 `;
 
-const TextArea = styled.textarea`
+const TextArea = styled.textarea<{ hasError?: boolean }>`
   width: 100%;
   padding: ${theme.spacing.md};
   background-color: ${theme.colors.background.secondary};
-  border: 1px solid ${theme.colors.border.default};
+  border: 1px solid
+    ${(props) => (props.hasError ? "#ef4444" : theme.colors.border.default)};
   border-radius: 8px;
   color: ${theme.colors.text.primary};
   font-size: ${theme.typography.fontSize.md};
@@ -125,13 +134,24 @@ const TextArea = styled.textarea`
 
   &:focus {
     outline: none;
-    border-color: ${theme.colors.accent.main};
-    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+    border-color: ${(props) =>
+      props.hasError ? "#ef4444" : theme.colors.accent.main};
+    box-shadow: 0 0 0 3px
+      ${(props) =>
+        props.hasError ? "rgba(239, 68, 68, 0.1)" : "rgba(79, 70, 229, 0.1)"};
   }
 
   &::placeholder {
     color: ${theme.colors.text.muted};
   }
+`;
+
+const ErrorMessage = styled.span`
+  display: block;
+  color: #ef4444;
+  font-size: ${theme.typography.fontSize.sm};
+  margin-top: ${theme.spacing.xs};
+  font-weight: ${theme.typography.fontWeight.medium};
 `;
 
 const SubmitButton = styled.button`
@@ -146,14 +166,20 @@ const SubmitButton = styled.button`
   cursor: pointer;
   transition: all 0.3s ease;
 
-  &:hover {
+  &:hover:not(:disabled) {
     background-color: ${theme.colors.accent.hover};
     transform: translateY(-2px);
     box-shadow: ${theme.shadows.md};
   }
 
-  &:active {
+  &:active:not(:disabled) {
     transform: translateY(0);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
   }
 `;
 
@@ -211,11 +237,14 @@ const StatusMessage = styled.div<{
 `;
 
 export default function ContactPage() {
-  const [formData, setFormData] = useState({
-    name: "",
-    subject: "",
-    email: "",
-    message: "",
+  const {
+    register,
+    handleSubmit: handleFormSubmit,
+    formState: { errors, isSubmitting: isFormSubmitting },
+    reset,
+  } = useForm<ContactFormData>({
+    resolver: zodResolver(contactFormSchema),
+    mode: "onBlur", // Validate on blur (when user leaves field)
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -225,15 +254,8 @@ export default function ContactPage() {
   } | null>(null);
   const [isVisible, setIsVisible] = useState(false);
 
-  const handleChange = (
-    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormData({ ...formData, [event.target.name]: event.target.value });
-  };
-
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    // Handle form submission here
+  const handleSubmit = async (data: ContactFormData) => {
+    setIsSubmitting(true);
 
     try {
       const response = await fetch("/api/contact", {
@@ -241,21 +263,22 @@ export default function ContactPage() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(data),
       });
 
-      const data = await response.json();
+      const responseData = await response.json();
 
       if (response.ok) {
         setStatus({
           type: "success",
-          message: "Message sent succesfully! I'll get back to you soon.",
+          message: "Message sent successfully! I'll get back to you soon.",
         });
-        setFormData({ name: "", email: "", subject: "", message: "" });
+        reset(); // Reset form fields
       } else {
         setStatus({
           type: "error",
-          message: data.error || "Failed to send message. Please try again.",
+          message:
+            responseData.error || "Failed to send message. Please try again.",
         });
       }
     } catch (error) {
@@ -307,7 +330,8 @@ export default function ContactPage() {
           <ScrollReveal delay={0.2}>
             <Subtitle>
               Have a project in mind or just want to chat? I'd love to hear from
-              you. Drop me a message and I'll get back to you as soon as possible.
+              you. Drop me a message and I'll get back to you as soon as
+              possible.
             </Subtitle>
           </ScrollReveal>
         </Container>
@@ -350,60 +374,67 @@ export default function ContactPage() {
 
       <Section>
         <Container narrow>
-          <ContactForm onSubmit={handleSubmit}>
+          <ContactForm onSubmit={handleFormSubmit(handleSubmit)}>
             <FormGroup>
               <Label htmlFor="name">Name</Label>
               <Input
-                type="text"
+                {...register("name")}
                 id="name"
-                name="name"
+                type="text"
                 placeholder="Your name"
-                value={formData.name}
-                onChange={handleChange}
-                required
+                hasError={!!errors.name}
               />
+              {errors.name && (
+                <ErrorMessage>{errors.name.message}</ErrorMessage>
+              )}
             </FormGroup>
 
             <FormGroup>
               <Label htmlFor="email">Email</Label>
               <Input
-                type="email"
+                {...register("email")}
                 id="email"
-                name="email"
+                type="email"
                 placeholder="your.email@example.com"
-                value={formData.email}
-                onChange={handleChange}
-                required
+                hasError={!!errors.email}
               />
+              {errors.email && (
+                <ErrorMessage>{errors.email.message}</ErrorMessage>
+              )}
             </FormGroup>
 
             <FormGroup>
               <Label htmlFor="subject">Subject</Label>
               <Input
-                type="text"
+                {...register("subject")}
                 id="subject"
-                name="subject"
-                value={formData.subject}
+                type="text"
                 placeholder="What's this about?"
-                onChange={handleChange}
-                required
+                hasError={!!errors.subject}
               />
+              {errors.subject && (
+                <ErrorMessage>{errors.subject.message}</ErrorMessage>
+              )}
             </FormGroup>
 
             <FormGroup>
               <Label htmlFor="message">Message</Label>
               <TextArea
+                {...register("message")}
                 id="message"
-                name="message"
                 placeholder="Tell me about your project or just say hi!"
-                value={formData.message}
-                onChange={handleChange}
-                required
+                hasError={!!errors.message}
               />
+              {errors.message && (
+                <ErrorMessage>{errors.message.message}</ErrorMessage>
+              )}
             </FormGroup>
 
-            <SubmitButton type="submit" disabled={isSubmitting}>
-              Send Message
+            <SubmitButton
+              type="submit"
+              disabled={isSubmitting || isFormSubmitting}
+            >
+              {isSubmitting || isFormSubmitting ? "Sending..." : "Send Message"}
             </SubmitButton>
           </ContactForm>
         </Container>

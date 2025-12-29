@@ -176,8 +176,8 @@ const MobileNavLink = styled.a<{ isActive?: boolean }>`
   font-weight: ${theme.typography.fontWeight.medium};
   font-size: ${theme.typography.fontSize.lg};
   transition: all 0.2s ease;
-  border-left: 3px solid ${(props) =>
-    props.isActive ? theme.colors.accent.main : "transparent"};
+  border-left: 3px solid
+    ${(props) => (props.isActive ? theme.colors.accent.main : "transparent")};
   background-color: ${(props) =>
     props.isActive ? theme.colors.background.primary : "transparent"};
 
@@ -230,7 +230,10 @@ export function Header() {
             <Nav>
               <NavList>
                 <NavItem>
-                  <NavLink href={ROUTES.HOME} isActive={pathname === ROUTES.HOME}>
+                  <NavLink
+                    href={ROUTES.HOME}
+                    isActive={pathname === ROUTES.HOME}
+                  >
                     Home
                   </NavLink>
                 </NavItem>
