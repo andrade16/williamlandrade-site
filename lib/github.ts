@@ -1,3 +1,5 @@
+import { withCache, CACHE_KEYS, CACHE_TTL } from "./cache";
+
 // Fetch recent Github Events using GraphQL
 export async function getGitHubActivity(username: string) {
   const query = `
@@ -81,213 +83,231 @@ export async function getGitHubActivity(username: string) {
 
 // Fetch user stats using GraphQL
 export async function getGitHubStats(username: string) {
-  const query = `
-    query($username: String!) {
-      user(login: $username) {
-        name
-        login
-        bio
-        avatarUrl
-        url
-        createdAt
+  return withCache(
+    CACHE_KEYS.GITHUB_STATS(username),
+    async () => {
+      const query = `
+        query($username: String!) {
+          user(login: $username) {
+            name
+            login
+            bio
+            avatarUrl
+            url
+            createdAt
 
-        followers {
-          totalCount
-        }
-        following {
-          totalCount
-        }
+            followers {
+              totalCount
+            }
+            following {
+              totalCount
+            }
 
-        repositories(first: 100, privacy: PUBLIC) {
-          totalCount
-          nodes {
-            stargazerCount
-            forkCount
+            repositories(first: 100, privacy: PUBLIC) {
+              totalCount
+              nodes {
+                stargazerCount
+                forkCount
+              }
+            }
+
+            gists {
+              totalCount
+            }
+
+            organizations {
+              totalCount
+            }
+
+            contributionsCollection {
+              contributionCalendar {
+                totalContributions
+              }
+              totalCommitContributions
+              totalIssueContributions
+              totalPullRequestContributions
+              totalPullRequestReviewContributions
+            }
           }
         }
+      `;
 
-        gists {
-          totalCount
-        }
+      const response = await fetch("https://api.github.com/graphql", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+        },
+        body: JSON.stringify({
+          query,
+          variables: { username },
+        }),
+      });
 
-        organizations {
-          totalCount
-        }
-
-        contributionsCollection {
-          contributionCalendar {
-            totalContributions
-          }
-          totalCommitContributions
-          totalIssueContributions
-          totalPullRequestContributions
-          totalPullRequestReviewContributions
-        }
+      if (!response.ok) {
+        throw new Error("Failed to fetch GitHub stats");
       }
-    }
-  `;
 
-  const response = await fetch("https://api.github.com/graphql", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+      const data = await response.json();
+
+      // Check for GraphQL errors
+      if (data.errors) {
+        console.error("GraphQL errors:", data.errors);
+        throw new Error(
+          `GraphQL error: ${data.errors[0]?.message || "Unknown error"}`
+        );
+      }
+
+      const user = data.data?.user;
+
+      if (!user) {
+        console.error("No user data returned:", data);
+        throw new Error("User not found or query failed");
+      }
+
+      // Calculate total stars across all repos
+      const totalStars =
+        user.repositories?.nodes?.reduce(
+          (sum: number, repo: any) => sum + (repo.stargazerCount || 0),
+          0
+        ) || 0;
+
+      // Calculate total forks
+      const totalForks =
+        user.repositories?.nodes?.reduce(
+          (sum: number, repo: any) => sum + (repo.forkCount || 0),
+          0
+        ) || 0;
+
+      return {
+        ...user,
+        totalStars,
+        totalForks,
+      };
     },
-    body: JSON.stringify({
-      query,
-      variables: { username },
-    }),
-    next: { revalidate: 86400 }, // Cache for 24 hours
-  });
-
-  if (!response.ok) {
-    throw new Error("Failed to fetch GitHub stats");
-  }
-
-  const data = await response.json();
-
-  // Check for GraphQL errors
-  if (data.errors) {
-    console.error("GraphQL errors:", data.errors);
-    throw new Error(`GraphQL error: ${data.errors[0]?.message || "Unknown error"}`);
-  }
-
-  const user = data.data?.user;
-
-  if (!user) {
-    console.error("No user data returned:", data);
-    throw new Error("User not found or query failed");
-  }
-
-  // Calculate total stars across all repos
-  const totalStars = user.repositories?.nodes?.reduce(
-    (sum: number, repo: any) => sum + (repo.stargazerCount || 0),
-    0
-  ) || 0;
-
-  // Calculate total forks
-  const totalForks = user.repositories?.nodes?.reduce(
-    (sum: number, repo: any) => sum + (repo.forkCount || 0),
-    0
-  ) || 0;
-
-  return {
-    ...user,
-    totalStars,
-    totalForks,
-  };
+    CACHE_TTL.GITHUB_STATS
+  );
 }
 
 // Fetch contribution graph data using GraphQL
 export async function getGitHubContributions(username: string) {
-  const query = `
-    query($username: String!) {
-      user(login: $username) {
-        contributionsCollection {
-          contributionCalendar {
-            totalContributions
-            weeks {
-              contributionDays {
-                contributionCount
-                date
-                color
+  return withCache(
+    CACHE_KEYS.GITHUB_CONTRIBUTIONS(username),
+    async () => {
+      const query = `
+        query($username: String!) {
+          user(login: $username) {
+            contributionsCollection {
+              contributionCalendar {
+                totalContributions
+                weeks {
+                  contributionDays {
+                    contributionCount
+                    date
+                    color
+                  }
+                }
               }
             }
           }
         }
+      `;
+
+      const response = await fetch("https://api.github.com/graphql", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+        },
+        body: JSON.stringify({
+          query,
+          variables: { username },
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch GitHub contributions");
       }
-    }
-  `;
 
-  const response = await fetch("https://api.github.com/graphql", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+      const data = await response.json();
+      return data.data.user.contributionsCollection.contributionCalendar;
     },
-    body: JSON.stringify({
-      query,
-      variables: { username },
-    }),
-    next: { revalidate: 3600 }, // Cache for 1 hour
-  });
-
-  if (!response.ok) {
-    throw new Error("Failed to fetch GitHub contributions");
-  }
-
-  const data = await response.json();
-  return data.data.user.contributionsCollection.contributionCalendar;
+    CACHE_TTL.GITHUB_CONTRIBUTIONS
+  );
 }
 
 // Fetch and merge contributions from multiple users
 export async function getMergedGitHubContributions(usernames: string[]) {
-  // Fetch contributions for all users in parallel
-  const contributionPromises = usernames.map((username) =>
-    getGitHubContributions(username)
-  );
+  return withCache(
+    CACHE_KEYS.GITHUB_MERGED_CONTRIBUTIONS(usernames),
+    async () => {
+      // Fetch contributions for all users in parallel
+      // Note: Each individual fetch is also cached
+      const contributionPromises = usernames.map((username) =>
+        getGitHubContributions(username)
+      );
 
-  const allContributions = await Promise.all(contributionPromises);
+      const allContributions = await Promise.all(contributionPromises);
 
-  // Create a map to store merged contributions by date
-  const dateMap = new Map<
-    string,
-    { contributionCount: number; date: string }
-  >();
+      // Create a map to store merged contributions by date
+      const dateMap = new Map<
+        string,
+        { contributionCount: number; date: string }
+      >();
 
-  // Merge all contributions
-  allContributions.forEach((calendar) => {
-    calendar.weeks.forEach((week: any) => {
-      week.contributionDays.forEach((day: any) => {
-        const existing = dateMap.get(day.date);
-        if (existing) {
-          // Add to existing count
-          existing.contributionCount += day.contributionCount;
-        } else {
-          // Create new entry
-          dateMap.set(day.date, {
-            contributionCount: day.contributionCount,
-            date: day.date,
+      // Merge all contributions
+      allContributions.forEach((calendar) => {
+        calendar.weeks.forEach((week: any) => {
+          week.contributionDays.forEach((day: any) => {
+            const existing = dateMap.get(day.date);
+            if (existing) {
+              // Add to existing count
+              existing.contributionCount += day.contributionCount;
+            } else {
+              // Create new entry
+              dateMap.set(day.date, {
+                contributionCount: day.contributionCount,
+                date: day.date,
+              });
+            }
           });
+        });
+      });
+
+      // Calculate total contributions
+      const totalContributions = Array.from(dateMap.values()).reduce(
+        (sum, day) => sum + day.contributionCount,
+        0
+      );
+
+      // Reconstruct the weeks structure
+      const sortedDates = Array.from(dateMap.values()).sort(
+        (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+      );
+
+      // Group by weeks (7 days per week)
+      const weeks: any[] = [];
+      let currentWeek: any[] = [];
+
+      sortedDates.forEach((day, index) => {
+        currentWeek.push({
+          contributionCount: day.contributionCount,
+          date: day.date,
+          color: "", // GitHub doesn't return color for merged data
+        });
+
+        // Start a new week every 7 days or on last day
+        if (currentWeek.length === 7 || index === sortedDates.length - 1) {
+          weeks.push({ contributionDays: currentWeek });
+          currentWeek = [];
         }
       });
-    });
-  });
 
-  // Calculate total contributions
-  const totalContributions = Array.from(dateMap.values()).reduce(
-    (sum, day) => sum + day.contributionCount,
-    0
+      return {
+        totalContributions,
+        weeks,
+      };
+    },
+    CACHE_TTL.GITHUB_MERGED_CONTRIBUTIONS
   );
-
-  // Reconstruct the weeks structure
-  const sortedDates = Array.from(dateMap.values()).sort(
-    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
-  );
-
-  // Group by weeks (7 days per week)
-  const weeks: any[] = [];
-  let currentWeek: any[] = [];
-
-  sortedDates.forEach((day, index) => {
-    currentWeek.push({
-      contributionCount: day.contributionCount,
-      date: day.date,
-      color: "", // GitHub doesn't return color for merged data
-    });
-
-    // Start a new week every 7 days or on last day
-    if (
-      currentWeek.length === 7 ||
-      index === sortedDates.length - 1
-    ) {
-      weeks.push({ contributionDays: currentWeek });
-      currentWeek = [];
-    }
-  });
-
-  return {
-    totalContributions,
-    weeks,
-  };
 }

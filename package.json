@@ -20,6 +20,7 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@reduxjs/toolkit": "^2.11.1",
+    "@upstash/redis": "^1.36.0",
     "@vercel/analytics": "^1.6.1",
     "framer-motion": "^12.23.26",
     "next": "^16.0.10",
